@@ -10,6 +10,8 @@ public class Start {
 		ExtremeEditorGUI gui = new ExtremeEditorGUI();
 		gui.setVisible(true);
 		
+		System.out.println("Swag");
+		
 		 /* String fonts[] = 
 			      GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 
