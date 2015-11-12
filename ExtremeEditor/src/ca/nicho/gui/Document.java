@@ -18,10 +18,10 @@ public class Document extends JTextPane{
 	public HandlerAction handler;
 	
 	
-	public Document(){		
+	public Document(ActionHistoryFrame history){		
 		KeyStroke ctrlV = KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK);
 		this.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
-		this.handler = new HandlerAction(this);
+		this.handler = new HandlerAction(this, history);
 		this.addKeyListener(new Keystrokes(handler));
 		this.setCaretPosition(this.getDocument().getLength());
 	}

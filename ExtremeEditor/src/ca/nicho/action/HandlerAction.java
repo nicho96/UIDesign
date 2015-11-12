@@ -2,6 +2,7 @@ package ca.nicho.action;
 
 import java.util.Stack;
 
+import ca.nicho.gui.ActionHistoryFrame;
 import ca.nicho.gui.Document;
 
 public class HandlerAction {
@@ -10,9 +11,11 @@ public class HandlerAction {
 	public Stack<Action> done = new Stack<Action>();
 	public Stack<Action> undone = new Stack<Action>();
 	
+	private ActionHistoryFrame frame;
 	private Document parent;
 	
-	public HandlerAction(Document parent){
+	public HandlerAction(Document parent, ActionHistoryFrame frame){
+		this.frame = frame;
 		this.parent = parent;
 	}
 	

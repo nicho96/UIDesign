@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import ca.nicho.action.HandlerAction;
 import ca.nicho.gui.components.TextLineNumber;
 
 public class ExtremeEditorGUI extends JFrame{
@@ -17,10 +16,11 @@ public class ExtremeEditorGUI extends JFrame{
 	private MenuPanel menuPanel;
 	private FontPanel fontPanel;
 	private InfoPanel infoPanel;
+	private ActionHistoryFrame history;
 	
 	private JScrollPane scroll;
 	
-	public Document textArea = new Document();
+	public Document textArea;
 	
 	public ExtremeEditorGUI(){
 		
@@ -32,7 +32,10 @@ public class ExtremeEditorGUI extends JFrame{
 		this.headerPanel = new JPanel();
 		this.headerPanel.setLayout(new BorderLayout());
 		this.menuPanel = new MenuPanel(textArea.handler);
-		this.fontPanel = new FontPanel(textArea.handler);
+		this.history = new ActionHistoryFrame(this, textArea.handler);
+		this.fontPanel = new FontPanel(textArea.handler, history);
+		this.textArea = new Document(history);
+
 		
 		this.headerPanel.add(menuPanel, BorderLayout.PAGE_START);
 		this.headerPanel.add(fontPanel, BorderLayout.PAGE_END);
@@ -40,11 +43,13 @@ public class ExtremeEditorGUI extends JFrame{
 		this.editorPanel = new EditorPanel(textArea);
 		
 		this.infoPanel = new InfoPanel();
-		
+				
 		this.add(headerPanel, BorderLayout.PAGE_START);
 		this.add(scroll = new JScrollPane(editorPanel), BorderLayout.CENTER);
 		this.scroll.setRowHeaderView(new TextLineNumber(textArea));
 		this.add(infoPanel, BorderLayout.PAGE_END);
+		
+		
 	}
 	
 }

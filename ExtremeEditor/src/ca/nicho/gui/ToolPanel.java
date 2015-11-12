@@ -2,11 +2,9 @@ package ca.nicho.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
 import ca.nicho.action.HandlerAction;
 
@@ -14,11 +12,14 @@ public class ToolPanel extends JPanel implements ActionListener{
 		
 	private HandlerAction handler;
 	
-	private JButton undo, redo;
+	private ActionHistoryFrame actions;
 	
-	public ToolPanel(HandlerAction handler){
+	private JButton undo, redo, history;
+	
+	public ToolPanel(HandlerAction handler, ActionHistoryFrame actions){
 		
 		this.handler = handler;
+		this.actions = actions;
 		
 		undo = new JButton("<-");
 		undo.addActionListener(this);
@@ -26,7 +27,11 @@ public class ToolPanel extends JPanel implements ActionListener{
 
 		redo = new JButton("->");
 		redo.addActionListener(this);
+		
+		history = new JButton("VV");
+		history.addActionListener(this);
 			
+		this.add(history);
 		this.add(undo);
 		this.add(redo);
 		
@@ -39,7 +44,8 @@ public class ToolPanel extends JPanel implements ActionListener{
 			handler.getParent().undo();
 		else if(e.getSource().equals(redo))
 			handler.getParent().redo();
-		
+		else if(e.getSource().equals(history))
+			actions.toggle();
 	}
 	
 }

@@ -11,9 +11,9 @@ public class FontPanel extends JPanel{
 	
 	private JTextField size;
 	
-	public FontPanel(HandlerAction handler){
+	public FontPanel(HandlerAction handler, ActionHistoryFrame actions){
 		
-		toolPanel = new ToolPanel(handler);
+		toolPanel = new ToolPanel(handler, actions);
 		this.add(toolPanel);
 		
 		size = new JTextField(3);

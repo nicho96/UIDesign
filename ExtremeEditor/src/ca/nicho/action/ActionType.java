@@ -1,8 +1,5 @@
 package ca.nicho.action;
 
-import javax.swing.text.BadLocationException;
-
-import ca.nicho.gui.ExtremeEditorGUI;
 
 public class ActionType extends Action{
 
