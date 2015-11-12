@@ -9,9 +9,7 @@ public class Start {
 	public static void main(String[] s){
 		ExtremeEditorGUI gui = new ExtremeEditorGUI();
 		gui.setVisible(true);
-		
-		System.out.println("Swag");
-		
+				
 		 /* String fonts[] = 
 			      GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 
