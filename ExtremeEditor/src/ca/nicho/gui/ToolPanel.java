@@ -23,13 +23,14 @@ public class ToolPanel extends JPanel implements ActionListener{
 		
 		undo = new JButton("<-");
 		undo.addActionListener(this);
-		undo.setToolTipText("Undo the previous action");
+		undo.setToolTipText("Undo (Ctrl + Z)");
 
 		redo = new JButton("->");
 		redo.addActionListener(this);
 		
 		history = new JButton("VV");
 		history.addActionListener(this);
+		redo.setToolTipText("Redo (HotKey tbd)") ;
 			
 		this.add(history);
 		this.add(undo);

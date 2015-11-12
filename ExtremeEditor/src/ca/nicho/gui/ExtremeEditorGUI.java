@@ -29,12 +29,12 @@ public class ExtremeEditorGUI extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Extreme Editor Plus");
 
+		this.textArea = new Document(history);
 		this.headerPanel = new JPanel();
 		this.headerPanel.setLayout(new BorderLayout());
 		this.menuPanel = new MenuPanel(textArea.handler);
 		this.history = new ActionHistoryFrame(this, textArea.handler);
 		this.fontPanel = new FontPanel(textArea.handler, history);
-		this.textArea = new Document(history);
 
 		
 		this.headerPanel.add(menuPanel, BorderLayout.PAGE_START);
