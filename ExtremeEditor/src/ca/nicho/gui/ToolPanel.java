@@ -47,6 +47,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 			handler.getParent().redo();
 		else if(e.getSource().equals(history))
 			actions.toggle();
+		
 	}
 	
 }
