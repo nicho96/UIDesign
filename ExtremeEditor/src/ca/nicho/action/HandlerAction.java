@@ -7,9 +7,8 @@ import ca.nicho.gui.Document;
 
 public class HandlerAction {
 
-
-	public Stack<Action> done = new Stack<Action>();
-	public Stack<Action> undone = new Stack<Action>();
+	ActionStack done = new ActionStack();
+	ActionStack undone = new ActionStack();
 	
 	private ActionHistoryFrame frame;
 	private Document parent;
@@ -23,4 +22,37 @@ public class HandlerAction {
 		return parent;
 	}
 	
+	public void addDoneAction(Action a){
+		done.addAction(a);
+		frame.getHistoryFrame().update();
+	}
+	
+	public void addUndoneAction(Action a){
+		undone.addAction(a);
+		frame.getHistoryFrame().update();
+	}
+	
+	public Action getDoneAction(int i){
+		return done.getActionAt(i);
+	}
+	
+	public Action getUndoneAction(int i){
+		return undone.getActionAt(i);
+	}
+	
+	public int getDoneSize(){
+		return done.size();
+	}
+	
+	public int getUndoneSize(){
+		return undone.size();
+	}
+	
+	public Action popDone(){
+		return done.pop();
+	}
+	
+	public Action popUndone(){
+		return undone.pop();
+	}
 }

@@ -1,7 +1,6 @@
 package ca.nicho.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -9,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import ca.nicho.action.HandlerAction;
 import ca.nicho.gui.components.TextLineNumber;
 
 public class ExtremeEditorGUI extends JFrame{
@@ -21,6 +21,7 @@ public class ExtremeEditorGUI extends JFrame{
 	private InfoPanel infoPanel;
 	private ActionHistoryFrame historyDialog;
 	private HistoryPanel historyPanel;
+	private HandlerAction handler;
 	
 	private JScrollPane scroll;
 	
@@ -33,13 +34,17 @@ public class ExtremeEditorGUI extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Extreme Editor Plus");
 
-		this.textArea = new Document(historyDialog);
+		this.textArea = new Document();
+		this.historyPanel = new HistoryPanel();
+		this.historyDialog = new ActionHistoryFrame(this, historyPanel);
+		handler = new HandlerAction(textArea, historyDialog);
+		textArea.setHandler(handler);
+		historyPanel.setHandler(handler);
+		System.out.println(historyDialog);
 		this.headerPanel = new JPanel();
 		this.headerPanel.setLayout(new BorderLayout());
-		this.menuPanel = new MenuPanel(textArea.handler);
-		this.historyPanel = new HistoryPanel(textArea.handler);
-		this.historyDialog = new ActionHistoryFrame(this, historyPanel);
-		this.fontPanel = new FontPanel(textArea.handler, historyDialog);
+		this.menuPanel = new MenuPanel(handler);
+		this.fontPanel = new FontPanel(handler, historyDialog);
 
 		
 		this.headerPanel.add(menuPanel, BorderLayout.PAGE_START);

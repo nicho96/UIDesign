@@ -5,12 +5,10 @@ import java.awt.event.KeyListener;
 
 import javax.swing.text.BadLocationException;
 
-import ca.nicho.action.Action;
 import ca.nicho.action.ActionDelete;
 import ca.nicho.action.ActionType;
 import ca.nicho.action.HandlerAction;
 import ca.nicho.gui.Document;
-import ca.nicho.gui.ExtremeEditorGUI;
 
 public class Keystrokes implements KeyListener{
 
@@ -47,7 +45,7 @@ public class Keystrokes implements KeyListener{
 				if(doc.getSelectedText() != null){
 					text = doc.getSelectedText();
 					doc.getDocument().remove(Math.min(doc.getSelectionStart(), doc.getSelectionEnd()), text.length());
-					handler.done.add(new ActionDelete(pos, handler, text));
+					handler.addDoneAction(new ActionDelete(pos, handler, text));
 				}else{
 					if(pos > 0){
 						pos -= 1;
@@ -56,7 +54,7 @@ public class Keystrokes implements KeyListener{
 						if(!backspace){
 							backspace = true;
 							delete = new ActionDelete(pos, handler, text);
-							handler.done.add(delete);
+							handler.addDoneAction(delete);
 						}else{
 							delete.addText(text);
 							delete.setPos(pos);
@@ -78,7 +76,7 @@ public class Keystrokes implements KeyListener{
 					insert = new ActionType(pos - 1, handler);
 				else
 					insert = new ActionType(pos, handler);
-				handler.done.add(insert);
+				handler.addDoneAction(insert);
 				lastString = "";
 			}
 			

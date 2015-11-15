@@ -9,7 +9,7 @@ public class ActionDelete extends Action{
 	private String value;
 	
 	public ActionDelete(int pos, HandlerAction handler, String value){
-		super(pos, value.length(), false, handler);
+		super(pos, value.length(), false, handler, "Deletion");
 		this.value = value;
 	}
 
@@ -30,6 +30,14 @@ public class ActionDelete extends Action{
 	@Override
 	public void redoAction() {
 		handler.getParent().remove(pos, length);
+	}
+
+	@Override
+	public String getPreview() {
+		String s = name + ": ";
+		s += value.substring(0, (value.length() < 10) ? value.length() : 10) + "... ";
+		s += "(" + length + " characters deleted)";
+		return s;
 	}
 
 	

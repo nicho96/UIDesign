@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 
 import ca.nicho.action.Action;
 import ca.nicho.action.HandlerAction;
@@ -15,14 +13,11 @@ import ca.nicho.keyboard.Keystrokes;
 
 public class Document extends JTextPane{
 
-	public HandlerAction handler;
+	private HandlerAction handler;
 	
-	
-	public Document(ActionHistoryFrame history){		
+	public Document(){		
 		KeyStroke ctrlV = KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK);
 		this.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
-		this.handler = new HandlerAction(this, history);
-		this.addKeyListener(new Keystrokes(handler));
 		this.setCaretPosition(this.getDocument().getLength());
 	}
 	
@@ -52,29 +47,25 @@ public class Document extends JTextPane{
 	}
 	
 	public void undo(){
-
-		//TODO remove, just for debugging
-		System.out.print("[");
-
-		for(int i = 0; i < handler.done.size(); i++){
-			System.out.print(handler.done.get(i).getClass().getName() + ", ");
-		}
-		System.out.println();
 		
-		
-		if(handler.done.isEmpty())
+		if(handler.getDoneSize() == 0)
 			return;
-		Action a = handler.done.pop();
+		Action a = handler.popDone();
 		a.undoAction();
-		handler.undone.add(a);
+		handler.addUndoneAction(a);
 	}
 	
 	public void redo(){
-		if(handler.undone.isEmpty())
+		if(handler.getUndoneSize() == 0)
 			return;
-		Action a = handler.undone.pop();
+		Action a = handler.popUndone();
 		a.redoAction();
-		handler.done.add(a);
+		handler.addDoneAction(a);
+	}
+	
+	public void setHandler(HandlerAction handler){
+		this.handler = handler;
+		this.addKeyListener(new Keystrokes(handler));
 	}
 	
 }

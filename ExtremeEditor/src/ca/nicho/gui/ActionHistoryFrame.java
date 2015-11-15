@@ -20,6 +20,7 @@ public class ActionHistoryFrame extends JDialog implements ActionListener{
 		this.setBounds(frame.getWidth() - 300, 150, 300, frame.getHeight() - 150);
 		
 		this.history = history;
+		System.out.println(history);
 		
 		this.add(history);
 		close = new JButton("Hide");
@@ -35,6 +36,10 @@ public class ActionHistoryFrame extends JDialog implements ActionListener{
 		
 		if(src.equals(close))
 			this.setVisible(false);
+	}
+	
+	public HistoryPanel getHistoryFrame(){
+		return history;
 	}
 	
 	public void toggle(){
