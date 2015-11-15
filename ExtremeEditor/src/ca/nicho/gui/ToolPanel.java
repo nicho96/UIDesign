@@ -1,9 +1,11 @@
 package ca.nicho.gui;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -36,8 +38,12 @@ public class ToolPanel extends JPanel implements ActionListener{
 		undo.setIcon(undoIcon);
 		undo.addActionListener(this);
 		undo.setToolTipText("Undo (Ctrl + Z)");
+		undo.setBorder(BorderFactory.createEmptyBorder());
+		undo.setContentAreaFilled(false);
 
 		redo = new JButton(redoIcon);
+		redo.setBorder(BorderFactory.createEmptyBorder());
+		redo.setContentAreaFilled(false);
 		redo.addActionListener(this);
 		
 		history = new JButton("VV");
@@ -47,7 +53,6 @@ public class ToolPanel extends JPanel implements ActionListener{
 		this.add(history);
 		this.add(undo);
 		this.add(redo);
-		
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package ca.nicho.gui;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -19,6 +20,8 @@ public class InfoPanel extends JPanel{
 		messageLabel = new JLabel("Welcome!");
 		this.add(messageLabel);
 		this.add(countLabel);
+		this.setBackground(new Color(200,249,247));
+		
 		
 	}
 	

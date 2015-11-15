@@ -1,6 +1,7 @@
 package ca.nicho.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;

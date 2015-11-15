@@ -1,6 +1,7 @@
 package ca.nicho.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -48,6 +49,7 @@ public class ExtremeEditorGUI extends JFrame{
 		this.setPreferredSize(new Dimension(300, 600));
 		
 		this.infoPanel = new InfoPanel();
+
 						
 		this.add(headerPanel, BorderLayout.PAGE_START);
 		this.add(scroll = new JScrollPane(editorPanel), BorderLayout.CENTER);
