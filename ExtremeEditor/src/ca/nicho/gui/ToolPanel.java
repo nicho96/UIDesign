@@ -1,5 +1,6 @@
 package ca.nicho.gui;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,12 +22,22 @@ public class ToolPanel extends JPanel implements ActionListener{
 		
 		this.handler = handler;
 		this.actions = actions;
-		ImageIcon undoIcon = new ImageIcon("icon.xpm");
+		ImageIcon undoIcon = new ImageIcon("res/undo.png");
+		ImageIcon redoIcon = new ImageIcon("res/redo.png");
+		
+		Image img = undoIcon.getImage();
+		Image undoImg = img.getScaledInstance( 32, 32,  java.awt.Image.SCALE_SMOOTH );
+		img = redoIcon.getImage();
+		Image redoImg = img.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
+
+		undoIcon.setImage(undoImg);
+		redoIcon = new ImageIcon(redoImg);
 		undo = new JButton(undoIcon);
+		undo.setIcon(undoIcon);
 		undo.addActionListener(this);
 		undo.setToolTipText("Undo (Ctrl + Z)");
 
-		redo = new JButton("->");
+		redo = new JButton(redoIcon);
 		redo.addActionListener(this);
 		
 		history = new JButton("VV");
