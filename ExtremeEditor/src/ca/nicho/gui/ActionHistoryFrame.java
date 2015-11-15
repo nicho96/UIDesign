@@ -4,44 +4,33 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-
-import ca.nicho.action.HandlerAction;
 
 
 public class ActionHistoryFrame extends JDialog implements ActionListener{
-	
-	private DefaultListModel<String> list;
-	private HandlerAction handler;
-	
-	private JList<String> listDisplay;
+
 	
 	private JButton close;
+	private HistoryPanel history;
 	
-	public ActionHistoryFrame(JFrame frame, HandlerAction handler){
+	public ActionHistoryFrame(JFrame frame, HistoryPanel history){
 		super(frame, false);
-		this.setSize(200, 200);
+		this.setBounds(frame.getWidth() - 300, 150, 300, frame.getHeight() - 150);
 		
-		this.handler = handler;
-	
-		list = new DefaultListModel<String>();
+		this.history = history;
 		
-		listDisplay = new JList<String>(list);
-		this.add(new JScrollPane(listDisplay), BorderLayout.CENTER);
-		
+		this.add(history);
 		close = new JButton("Hide");
 		close.addActionListener(this);
 		this.add(close, BorderLayout.PAGE_END);
-		this.setVisible(true);
+		this.setTitle("Undo/Redo History");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		history.update();
 		Object src = e.getSource();
 		
 		if(src.equals(close))
@@ -50,12 +39,6 @@ public class ActionHistoryFrame extends JDialog implements ActionListener{
 	
 	public void toggle(){
 		this.setVisible(!this.isVisible());
-	}
-	
-	public void update(){
-		for(int i = 0; i < handler.done.size(); i++){
-			list.addElement(handler.done.elementAt(i).toString());
-		}
 	}
 	
 }

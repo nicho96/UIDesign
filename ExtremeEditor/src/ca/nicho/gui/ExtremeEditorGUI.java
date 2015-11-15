@@ -1,6 +1,8 @@
 package ca.nicho.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,7 +18,8 @@ public class ExtremeEditorGUI extends JFrame{
 	private MenuPanel menuPanel;
 	private FontPanel fontPanel;
 	private InfoPanel infoPanel;
-	private ActionHistoryFrame history;
+	private ActionHistoryFrame historyDialog;
+	private HistoryPanel historyPanel;
 	
 	private JScrollPane scroll;
 	
@@ -24,26 +27,28 @@ public class ExtremeEditorGUI extends JFrame{
 	
 	public ExtremeEditorGUI(){
 		
-		this.setBounds(10, 10, 900, 600);
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Extreme Editor Plus");
 
-		this.textArea = new Document(history);
+		this.textArea = new Document(historyDialog);
 		this.headerPanel = new JPanel();
 		this.headerPanel.setLayout(new BorderLayout());
 		this.menuPanel = new MenuPanel(textArea.handler);
-		this.history = new ActionHistoryFrame(this, textArea.handler);
-		this.fontPanel = new FontPanel(textArea.handler, history);
+		this.historyPanel = new HistoryPanel(textArea.handler);
+		this.historyDialog = new ActionHistoryFrame(this, historyPanel);
+		this.fontPanel = new FontPanel(textArea.handler, historyDialog);
 
 		
 		this.headerPanel.add(menuPanel, BorderLayout.PAGE_START);
 		this.headerPanel.add(fontPanel, BorderLayout.PAGE_END);
 
 		this.editorPanel = new EditorPanel(textArea);
+		this.setPreferredSize(new Dimension(300, 600));
 		
 		this.infoPanel = new InfoPanel();
-				
+						
 		this.add(headerPanel, BorderLayout.PAGE_START);
 		this.add(scroll = new JScrollPane(editorPanel), BorderLayout.CENTER);
 		this.scroll.setRowHeaderView(new TextLineNumber(textArea));
