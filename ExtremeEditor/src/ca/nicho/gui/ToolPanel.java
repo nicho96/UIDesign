@@ -3,6 +3,7 @@ package ca.nicho.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -20,8 +21,8 @@ public class ToolPanel extends JPanel implements ActionListener{
 		
 		this.handler = handler;
 		this.actions = actions;
-		
-		undo = new JButton("<-");
+		ImageIcon undoIcon = new ImageIcon("icon.xpm");
+		undo = new JButton(undoIcon);
 		undo.addActionListener(this);
 		undo.setToolTipText("Undo (Ctrl + Z)");
 
