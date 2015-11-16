@@ -32,6 +32,12 @@ public class HandlerAction {
 		frame.getHistoryFrame().update();
 	}
 	
+	public Action removeDoneAction(int i){
+		Action a = done.removeAction(i);
+		frame.getHistoryFrame().update();
+		return a;
+	}
+	
 	public Action getDoneAction(int i){
 		return done.getActionAt(i);
 	}
