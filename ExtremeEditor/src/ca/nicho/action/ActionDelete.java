@@ -1,9 +1,5 @@
 package ca.nicho.action;
 
-import javax.swing.text.BadLocationException;
-
-import ca.nicho.gui.ExtremeEditorGUI;
-
 public class ActionDelete extends Action{
 
 	private String value;
@@ -23,6 +19,11 @@ public class ActionDelete extends Action{
 	}
 	
 	@Override
+	public int getLength(){
+		return -length;
+	}
+	
+	@Override
 	public void undoAction() {
 		handler.getParent().insertString(pos, value);
 	}
@@ -34,9 +35,7 @@ public class ActionDelete extends Action{
 
 	@Override
 	public String getPreview() {
-		String s = name + ": ";
-		s += value.substring(0, (value.length() < 10) ? value.length() : 10) + "... ";
-		s += "(" + length + " characters deleted)";
+		String s = name + " (" + value.length() + " deleted): " + value;
 		return s;
 	}
 

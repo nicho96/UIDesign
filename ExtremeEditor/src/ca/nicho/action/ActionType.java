@@ -27,9 +27,7 @@ public class ActionType extends Action{
 	
 	@Override
 	public String getPreview() {
-		String s = name + ":\t";
-		s += value.substring(0, (value.length() < 10) ? value.length() : 10) + "...\t";
-		s += length;
+		String s = name + " (" + value.length() + " inserted): " + value + " " + pos;
 		return s;
 	}
 

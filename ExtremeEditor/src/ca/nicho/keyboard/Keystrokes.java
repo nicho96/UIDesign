@@ -87,6 +87,7 @@ public class Keystrokes implements KeyListener{
 				insert = null;
 			}
 		}		
+		handler.getFrame().getHistoryFrame().update();
 	}
 
 	@Override

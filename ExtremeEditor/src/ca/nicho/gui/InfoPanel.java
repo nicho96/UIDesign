@@ -22,7 +22,6 @@ public class InfoPanel extends JPanel{
 		this.add(countLabel);
 		this.setBackground(new Color(200,249,247));
 		
-		
 	}
 	
 	public void setMessage(String s){

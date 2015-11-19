@@ -1,14 +1,12 @@
 package ca.nicho.action;
 
-import java.util.Stack;
-
 import ca.nicho.gui.ActionHistoryFrame;
 import ca.nicho.gui.Document;
 
 public class HandlerAction {
 
-	ActionStack done = new ActionStack();
-	ActionStack undone = new ActionStack();
+	private ActionStack done = new ActionStack();
+	private ActionStack undone = new ActionStack();
 	
 	private ActionHistoryFrame frame;
 	private Document parent;
@@ -56,6 +54,23 @@ public class HandlerAction {
 	
 	public Action popDone(){
 		return done.pop();
+	}
+	
+	public ActionHistoryFrame getFrame(){
+		return frame;
+	}
+	
+	public void updateDoneActions(Action a){
+	
+		int index = 0;
+		Action nextAction = done.getActionAt(index);
+
+		while(nextAction != null){
+			if(nextAction.getPos() >= a.getPos())
+				nextAction.setPos(nextAction.getPos() - a.getLength());
+			nextAction = done.getActionAt(++index);
+		}
+		
 	}
 	
 	public Action popUndone(){

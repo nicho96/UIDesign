@@ -16,6 +16,22 @@ public abstract class Action {
 		this.name = name;
 	}
 	
+	public int getPos(){
+		return pos;
+	}
+	
+	public void setPos(int pos){
+		this.pos = pos;
+	}
+	
+	public int getLength(){
+		return length;
+	}
+	
+	public boolean canChangeBelow(){
+		return stackChange;
+	}
+	
 	public abstract void undoAction();
 	
 	public abstract void redoAction();

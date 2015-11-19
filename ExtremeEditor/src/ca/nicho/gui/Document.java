@@ -53,6 +53,7 @@ public class Document extends JTextPane{
 		Action a = handler.popDone();
 		a.undoAction();
 		handler.addUndoneAction(a);
+		
 	}
 	
 	public void redo(){
