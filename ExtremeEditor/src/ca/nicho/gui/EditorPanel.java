@@ -16,7 +16,7 @@ public class EditorPanel extends JPanel{
 	public EditorPanel(JTextPane area){
 		
 		this.setLayout(new BorderLayout());
-		Color editorPanel = new Color(239,253,255);
+		Color editorPanel = new Color(214,214,210);
 		area.setBackground(editorPanel);
 		this.add(area);
 			

@@ -40,6 +40,8 @@ public class ToolPanel extends JPanel implements ActionListener{
 		undo.setToolTipText("Undo (Ctrl + Z)");
 		undo.setBorder(BorderFactory.createEmptyBorder());
 		undo.setContentAreaFilled(false);
+		this.setBackground(new Color(166,177,178));
+		
 
 		redo = new JButton(redoIcon);
 		redo.setBorder(BorderFactory.createEmptyBorder());

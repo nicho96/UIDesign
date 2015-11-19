@@ -20,7 +20,7 @@ public class InfoPanel extends JPanel{
 		messageLabel = new JLabel("Welcome!");
 		this.add(messageLabel);
 		this.add(countLabel);
-		this.setBackground(new Color(200,249,247));
+		this.setBackground(new Color(166,177,178));
 		
 	}
 	
