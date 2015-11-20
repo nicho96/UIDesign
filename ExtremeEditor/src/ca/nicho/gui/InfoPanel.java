@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,6 +22,7 @@ public class InfoPanel extends JPanel{
 		this.add(messageLabel);
 		this.add(countLabel);
 		this.setBackground(new Color(166,177,178));
+		this.setBorder(BorderFactory.createEtchedBorder());
 		
 	}
 	

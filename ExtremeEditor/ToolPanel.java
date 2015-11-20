@@ -72,7 +72,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 		this.add(history);
 		this.add(undo);
 		this.add(redo);
-		this.setPreferredSize(new Dimension(60,40));
+		this.setPreferredSize(new Dimension(120,40));
 	}
 	
 	@Override
