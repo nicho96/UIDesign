@@ -60,17 +60,13 @@ public class HandlerAction {
 		return frame;
 	}
 	
-	public void updateDoneActions(Action a){
-	
-		int index = 0;
-		Action nextAction = done.getActionAt(index);
-
-		while(nextAction != null){
-			if(nextAction.getPos() >= a.getPos())
-				nextAction.setPos(nextAction.getPos() - a.getLength());
-			nextAction = done.getActionAt(++index);
+	public void undoAction(int index){
+		Action a = removeDoneAction(index);
+		a.undoAction();
+		for(int i = index; i < done.size(); i++){
+			Action tmp = getDoneAction(i);
+			tmp.setPos(tmp.getPos() - a.getLength());
 		}
-		
 	}
 	
 	public Action popUndone(){
