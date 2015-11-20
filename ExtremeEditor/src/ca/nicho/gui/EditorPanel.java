@@ -19,7 +19,7 @@ public class EditorPanel extends JPanel{
 		
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createLoweredSoftBevelBorder());
-		Color editorPanel = new Color(214,214,210);
+		Color editorPanel = new Color(249,249,249);
 		area.setBackground(editorPanel);
 		this.add(area);
 	}
