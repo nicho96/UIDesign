@@ -35,7 +35,7 @@ public class ActionDelete extends Action{
 
 	@Override
 	public String getPreview() {
-		String s = name + " (" + value.length() + " deleted): " + value;
+		String s = name + " (" + value.length() + " deleted): " + value + " " + pos;
 		return s;
 	}
 

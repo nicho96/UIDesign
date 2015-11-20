@@ -101,9 +101,7 @@ public class HistoryPanel extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2){
 			for(int i : listDoneDisplay.getSelectedIndices()){
-				Action a = handler.removeDoneAction(handler.getDoneSize() - i - 1);
-				a.undoAction();
-				handler.updateDoneActions(a);
+				handler.undoAction(handler.getDoneSize() - i - 1);
 			}
 		}
 	}

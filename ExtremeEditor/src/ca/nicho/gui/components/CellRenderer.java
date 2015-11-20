@@ -15,8 +15,10 @@ public class CellRenderer extends DefaultListCellRenderer{
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 	Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-		if (index > stopInd && stopInd >= 0)
-			setBackground(grey);
+		if (index > stopInd && stopInd >= 0){
+			//setBackground(grey);
+			c.setEnabled(false);
+		}
 		return c;
 	}
 	
