@@ -55,7 +55,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 		redo.addActionListener(this);
 		redo.setBorder(BorderFactory.createEmptyBorder());
 
-		redo.setBorder(BorderFactory.createEmptyBorder(0,0,3,0));
+		redo.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 		redo.setToolTipText("Redo (HotKey tbd)") ;
 
 		
