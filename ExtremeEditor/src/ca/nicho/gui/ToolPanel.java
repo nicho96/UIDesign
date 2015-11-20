@@ -1,7 +1,9 @@
 package ca.nicho.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +13,9 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 import ca.nicho.action.HandlerAction;
 
@@ -23,7 +28,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 	private JButton undo, redo, history;
 	
 	public ToolPanel(HandlerAction handler, ActionHistoryFrame actions){
-		
+		this.setLayout(new GridLayout(1,3));
 		this.handler = handler;
 		this.actions = actions;
 		ImageIcon undoIcon = new ImageIcon("res/undo.png");
@@ -40,30 +45,33 @@ public class ToolPanel extends JPanel implements ActionListener{
 		undo.setIcon(undoIcon);
 		undo.addActionListener(this);
 		undo.setToolTipText("Undo (Ctrl + Z)");
-		undo.setBorder(BorderFactory.createEmptyBorder(0,0,3,0));
+		undo.setBorder(BorderFactory.createEmptyBorder());
 		undo.setContentAreaFilled(false);
 		this.setBackground(new Color(166,177,178));
 		
 
 		redo = new JButton(redoIcon);
-		redo.setBorder(BorderFactory.createEmptyBorder());
 		redo.setContentAreaFilled(false);
 		redo.addActionListener(this);
-		redo.setBorder(BorderFactory.createEmptyBorder(0,0,3,0));
+		redo.setBorder(BorderFactory.createEmptyBorder());
 		
 		ImageIcon historyIcon = new ImageIcon("res/history.png");
 		Image histImg = historyIcon.getImage();
 		histImg = histImg.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
 		historyIcon.setImage(histImg);
 		history = new JButton(historyIcon);
-		history.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
+		history.setBorder(BorderFactory.createEmptyBorder(-5, -15, 0, -15));
 		history.setContentAreaFilled(false);
+		history.setToolTipText("Undo/Redo History");
 		history.addActionListener(this);
 		redo.setToolTipText("Redo (HotKey tbd)") ;
+		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		this.add(history);
 		this.add(undo);
 		this.add(redo);
-		this.setPreferredSize(new Dimension(250,40));
+
+		
+		this.setPreferredSize(new Dimension(120,40));
 	}
 	
 	@Override

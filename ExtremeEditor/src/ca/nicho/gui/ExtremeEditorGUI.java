@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -58,7 +59,9 @@ public class ExtremeEditorGUI extends JFrame{
 						
 		this.add(headerPanel, BorderLayout.PAGE_START);
 		this.add(scroll = new JScrollPane(editorPanel), BorderLayout.CENTER);
-		this.scroll.setRowHeaderView(new TextLineNumber(textArea));
+		TextLineNumber lineNum = new TextLineNumber(textArea);
+		this.scroll.setRowHeaderView(lineNum);
+		
 		this.add(infoPanel, BorderLayout.PAGE_END);
 		
 		
