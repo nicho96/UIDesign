@@ -35,7 +35,5 @@ public abstract class Action {
 	public abstract void undoAction();
 	
 	public abstract void redoAction();
-	
-	public abstract String getPreview();
-	
+		
 }

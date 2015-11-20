@@ -1,75 +1,57 @@
 package ca.nicho.action;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class ActionStack {
 
-	private ActionNode head;
-	private int size;
+	private Stack<Action> stack;
 	
 	public ActionStack(){
-		head = new ActionNode(new ActionType(1, null));
-		size = 0;
+		stack = new Stack<Action>();
 	}
 	
 	public void addAction(Action a){
-		//Do checks if it is a retro-reversible action
-		head.addAction(a);
-		size++;
+		stack.add(a);
 	}
 	
 	public Action peek(){
-		return head.getActionStack().peek();
+		return stack.peek();
 	}
 	
 	public Action pop(){
-		size --;
-		return head.popAction();
+		return stack.pop();
 	}
 	
 	public int size(){
-		return size;
+		return stack.size();
 	}
 	
 	public Action getActionAt(int i){
-		if(i >= size)
-			return null;
-		
-		int current = i;
-		ActionNode tmp = head;
-		boolean loop = true;
-		while(loop){
-			if(tmp == null)
-				return null;
-			if(current - tmp.getActionStack().size() <= 0){
-				loop = false;
-			}else{
-				current -= tmp.getActionStack().size();
-				tmp = tmp.getLink();
-			}
-		}
-		
-		return tmp.getActionStack().get(current);
-		
+		return stack.get(i);
 	}
 	
 	public Action removeAction(int i){
-		if(i >= size)
-			return null;
-		
-		int current = i;
-		ActionNode tmp = head;
-		boolean loop = true;
-		while(loop){
-			if(tmp == null)
-				return null;
-			if(current - tmp.getActionStack().size() <= 0){
-				loop = false;
-			}else{
-				current -= tmp.getActionStack().size();
-				tmp = tmp.getLink();
-			}
+		return stack.remove(i);
+	}
+	
+	public int removeAction(Action a){
+		int i = stack.indexOf(a);
+		stack.remove(a);
+		return i;
+	}
+	
+	public int getIndex(Action a){
+		return stack.indexOf(a);
+	}
+
+	public ArrayList<Integer> getNodeActions(int index){
+		ArrayList<Integer> vals = new ArrayList<Integer>();
+		for(int i = index; i >= 0; i--){
+			if(!getActionAt(i).canChangeBelow())
+				vals.add(i);
 		}
-		size --;
-		return tmp.getActionStack().remove(current);
+		return vals;
 	}
 	
 }
