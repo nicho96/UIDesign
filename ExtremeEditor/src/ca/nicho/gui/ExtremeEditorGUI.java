@@ -30,7 +30,7 @@ public class ExtremeEditorGUI extends JFrame{
 	
 	public ExtremeEditorGUI(){
 		
-		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		this.setSize(800, 600);
 		this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Extreme Editor Plus");
@@ -41,6 +41,7 @@ public class ExtremeEditorGUI extends JFrame{
 		handler = new HandlerAction(textArea, historyDialog);
 		textArea.setHandler(handler);
 		historyPanel.setHandler(handler);
+		
 		System.out.println(historyDialog);
 		this.headerPanel = new JPanel();
 		this.headerPanel.setLayout(new BorderLayout());
@@ -52,7 +53,6 @@ public class ExtremeEditorGUI extends JFrame{
 		this.headerPanel.add(fontPanel, BorderLayout.PAGE_END);
 
 		this.editorPanel = new EditorPanel(textArea);
-		this.setPreferredSize(new Dimension(300, 600));
 		
 		this.infoPanel = new InfoPanel();
 

@@ -25,8 +25,7 @@ public class ActionType extends Action{
 		handler.getParent().insertString(pos, value);
 	}
 	
-	@Override
-	public String getPreview() {
+	public String toString() {
 		String s = name + " (" + value.length() + " inserted): " + value + " " + pos;
 		return s;
 	}

@@ -33,8 +33,7 @@ public class ActionDelete extends Action{
 		handler.getParent().remove(pos, length);
 	}
 
-	@Override
-	public String getPreview() {
+	public String toString() {
 		String s = name + " (" + value.length() + " deleted): " + value + " " + pos;
 		return s;
 	}

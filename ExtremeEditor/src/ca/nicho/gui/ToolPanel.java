@@ -54,13 +54,20 @@ public class ToolPanel extends JPanel implements ActionListener{
 		redo.setContentAreaFilled(false);
 		redo.addActionListener(this);
 		redo.setBorder(BorderFactory.createEmptyBorder());
+
+		redo.setBorder(BorderFactory.createEmptyBorder(0,0,3,0));
+		redo.setToolTipText("Redo (HotKey tbd)") ;
+
 		
 		ImageIcon historyIcon = new ImageIcon("res/history.png");
 		Image histImg = historyIcon.getImage();
 		histImg = histImg.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
 		historyIcon.setImage(histImg);
 		history = new JButton(historyIcon);
+
 		history.setBorder(BorderFactory.createEmptyBorder(-5, -15, 0, -15));
+
+
 		history.setContentAreaFilled(false);
 		history.setToolTipText("Undo/Redo History");
 		history.addActionListener(this);

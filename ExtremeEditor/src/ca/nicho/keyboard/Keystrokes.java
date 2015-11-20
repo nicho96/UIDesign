@@ -27,9 +27,9 @@ public class Keystrokes implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
-		if(handler.getDoneSize() == 0){
-			System.out.println("TEST");
+		if(handler.getDoneSize() == 0 || handler.wasModified){
 			insert = null;
+			handler.wasModified = false;
 		}
 		
 		int pos = handler.getParent().getCaretPosition();
@@ -88,7 +88,7 @@ public class Keystrokes implements KeyListener{
 			lastString += e.getKeyChar();
 			insert.setString(lastString);
 	
-			if(e.getKeyChar() == '\n'){
+			if(e.getKeyChar() == '\n' || e.getKeyChar() == ',' || e.getKeyChar() == '.'){
 				insert = null;
 			}
 		}		
