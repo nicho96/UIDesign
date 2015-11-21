@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -46,6 +47,27 @@ public class ToolPanel extends JPanel implements ActionListener{
 		undo.setBorder(BorderFactory.createEtchedBorder());
 		undo.setContentAreaFilled(false);
 		
+		undo.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        undo.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	undo.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	undo.setBackground(Color.RED);
+		    }
+		    
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        undo.setBackground(UIManager.getColor("control"));
+		    }
+		});
+		
+		
+		
+		
+		
 		img = redoIcon.getImage();
 		Image redoImg = img.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
 		redoIcon = new ImageIcon(redoImg);
@@ -53,7 +75,23 @@ public class ToolPanel extends JPanel implements ActionListener{
 		redo.setContentAreaFilled(false);
 		redo.addActionListener(this);
 		redo.setBorder(BorderFactory.createEtchedBorder());
-		redo.setToolTipText("Redo (HotKey tbd)") ;
+		redo.setToolTipText("Redo (HotKey tbd)");
+		
+		redo.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        redo.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	redo.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	redo.setBackground(Color.RED);
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        redo.setBackground(UIManager.getColor("control"));
+		    }
+		});
 
 		
 		Image histImg = historyIcon.getImage();
@@ -64,6 +102,23 @@ public class ToolPanel extends JPanel implements ActionListener{
 		history.setContentAreaFilled(false);
 		history.setToolTipText("Undo/Redo History");
 		history.addActionListener(this);
+		
+		history.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        history.setBackground(Color.RED);
+		    }
+		    
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	history.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	history.setBackground(Color.RED);
+		    }
+		    	
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        history.setBackground(UIManager.getColor("control"));
+		    }
+		});
 
 		
 		
@@ -73,6 +128,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 		this.add(undo);
 		this.add(redo);
 		this.setPreferredSize(new Dimension(105,40));
+		
 	}
 	
 	@Override

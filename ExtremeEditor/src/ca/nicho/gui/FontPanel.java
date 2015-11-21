@@ -27,7 +27,7 @@ public class FontPanel extends JPanel{
 	private FileManagePanel fileManagePanel;	
 	
 	public FontPanel(HandlerAction handler, ActionHistoryFrame actions){
-		this.setLayout(new FlowLayout(FlowLayout.LEADING));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		fileManagePanel = new FileManagePanel(handler, actions);
 		toolPanel = new ToolPanel(handler, actions);
 		copypastePanel = new CPPanel(handler,actions);
