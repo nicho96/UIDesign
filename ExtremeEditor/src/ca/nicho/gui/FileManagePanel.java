@@ -73,11 +73,11 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		SpringLayout.Constraints deleteC = new SpringLayout.Constraints();
 		
 		this.setBackground(new Color(166,177,178));
-		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(open);
 		this.add(save);
 		this.add(delete);
-		this.setPreferredSize(new Dimension(60,40));
+		this.setPreferredSize(new Dimension(100,50));
 	}
 	
 	@Override

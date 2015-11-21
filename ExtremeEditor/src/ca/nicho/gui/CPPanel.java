@@ -69,11 +69,11 @@ public class CPPanel extends JPanel implements ActionListener{
 		
 		
 		this.setBackground(new Color(166,177,178));
-		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(cut);
 		this.add(copy);
 		this.add(paste);
-		this.setPreferredSize(new Dimension(60,40));
+		this.setPreferredSize(new Dimension(100,50));
 	}
 	
 	@Override

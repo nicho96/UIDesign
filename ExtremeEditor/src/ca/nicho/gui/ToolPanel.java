@@ -31,8 +31,10 @@ public class ToolPanel extends JPanel implements ActionListener{
 		this.setLayout(new GridLayout(1,3));
 		this.handler = handler;
 		this.actions = actions;
-		ImageIcon undoIcon = new ImageIcon("res/undo.png");
-		ImageIcon redoIcon = new ImageIcon("res/redo.png");
+		ImageIcon undoIcon = new ImageIcon("res/undo2.png");
+		ImageIcon redoIcon = new ImageIcon("res/redo2.png");
+		ImageIcon historyIcon = new ImageIcon("res/history2.png");
+
 		
 		Image img = undoIcon.getImage();
 		Image undoImg = img.getScaledInstance( 28, 28,  java.awt.Image.SCALE_SMOOTH );
@@ -55,12 +57,11 @@ public class ToolPanel extends JPanel implements ActionListener{
 		redo.setToolTipText("Redo (HotKey tbd)") ;
 
 		
-		ImageIcon historyIcon = new ImageIcon("res/history.png");
 		Image histImg = historyIcon.getImage();
-		histImg = histImg.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
+		histImg = histImg.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		historyIcon.setImage(histImg);
 		history = new JButton(historyIcon);
-		history.setBorder(BorderFactory.createEmptyBorder(-5, -15, 0, -15));
+		history.setBorder(BorderFactory.createEmptyBorder(3, -15, 0, -15));
 		history.setContentAreaFilled(false);
 		history.setToolTipText("Undo/Redo History");
 		history.addActionListener(this);
@@ -68,11 +69,11 @@ public class ToolPanel extends JPanel implements ActionListener{
 		
 		
 		this.setBackground(new Color(166,177,178));
-		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(history);
 		this.add(undo);
 		this.add(redo);
-		this.setPreferredSize(new Dimension(60,40));
+		this.setPreferredSize(new Dimension(100,50));
 	}
 	
 	@Override
