@@ -98,7 +98,7 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 		
 		for(int i = handler.getUndoneSize() - 1; i >= 0; i--){
 			undoneList.addElement(handler.getUndoneAction(i));
-			if(!handler.getDoneAction(i).canChangeBelow() && doneLimit < 0)
+			if(!handler.getUndoneAction(i).canChangeBelow() && doneLimit < 0)
 				undoneLimit = i;
 		}
 		
@@ -125,6 +125,9 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 			if(e.getSource().equals(listDoneDisplay)){
 				handler.undoAction(doneList.get(listDoneDisplay.getSelectedIndex()));
 				update();
+			}else if(e.getSource().equals(listUndoneDisplay)){
+				handler.redoAction(undoneList.get(listUndoneDisplay.getSelectedIndex()));
+				update();
 			}
 		}
 	}
@@ -140,17 +143,29 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 			new PreviewPanel(handler.getParent());
 		
 		if(src.equals(apply)){
-			if(handler.canMultipleUndo(listDoneDisplay.getSelectedIndices())){
-				for(int i : listDoneDisplay.getSelectedIndices()){
-					handler.undoAction(doneList.getElementAt(i));
+			if(undoPanel.isShowing()){
+				if(listDoneDisplay.getSelectedIndices().length != 0){
+					if(handler.canMultipleUndo(listDoneDisplay.getSelectedIndices())){
+						for(int i : listDoneDisplay.getSelectedIndices()){
+							handler.undoAction(doneList.getElementAt(i));
+						}
+					}else{
+						JOptionPane.showMessageDialog(this, "Error: Deletions above any other modifications must be selected to perform this action.");
+					}
 				}
 			}else{
-				JOptionPane.showMessageDialog(this, "Error: Deletions above any other modifications must be selected to perform this action.");
+				if(listUndoneDisplay.getSelectedIndices().length != 0){
+					if(handler.canMultipleRedo(listUndoneDisplay.getSelectedIndices())){
+						for(int i : listUndoneDisplay.getSelectedIndices()){
+							handler.redoAction(undoneList.getElementAt(i));
+						}
+					}else{
+						JOptionPane.showMessageDialog(this, "Error: Deletions above any other modifications must be selected to perform this action.");
+					}
+				}
 			}
 		}
-		
 		update();
-		
 	}
 	
 

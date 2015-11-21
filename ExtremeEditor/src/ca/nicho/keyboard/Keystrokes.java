@@ -14,6 +14,9 @@ public class Keystrokes implements KeyListener{
 
 	private HandlerAction handler;
 	
+	private boolean isCtrlPressed = false;
+	private boolean isAltPressed = false;
+	
 	private String lastString = "";
 	private ActionType insert;
 	private ActionDelete delete;
@@ -26,6 +29,9 @@ public class Keystrokes implements KeyListener{
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
+		
+		if(isCtrlPressed || isAltPressed)
+			return;
 		
 		if(handler.getDoneSize() == 0 || handler.wasModified){
 			insert = null;
@@ -97,13 +103,18 @@ public class Keystrokes implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		if(e.getKeyCode() == KeyEvent.VK_CONTROL)
+			isCtrlPressed = true;
+		if(e.getKeyCode() == KeyEvent.VK_ALT)
+			isAltPressed = true;
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getKeyCode() == KeyEvent.VK_CONTROL)
+			isCtrlPressed = false;
+		if(e.getKeyCode() == KeyEvent.VK_ALT)
+			isAltPressed = false;
 	}
 	
 }

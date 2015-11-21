@@ -40,6 +40,17 @@ public class HandlerAction {
 		return a;
 	}
 	
+	public void undo(){
+		undoAction(done.peek());
+		frame.getHistoryFrame().update();
+		
+	}
+	
+	public void redo(){
+		redoAction(undone.peek());
+		frame.getHistoryFrame().update();
+	}
+	
 	public Action getDoneAction(int i){
 		return done.getActionAt(i);
 	}
@@ -64,6 +75,18 @@ public class HandlerAction {
 		return frame;
 	}
 	
+	public void redoAction(Action a){
+		int index = undone.removeAction(a);
+		wasModified = true;
+		a.redoAction();
+		for(int i = index; i < done.size(); i++){
+			Action tmp = done.getActionAt(i);
+			tmp.setPos(tmp.getPos() + a.getLength());
+		}
+		
+		done.addAction(a);
+	}
+	
 	public void undoAction(Action a){
 		int index = done.removeAction(a);
 		wasModified = true;
@@ -72,17 +95,34 @@ public class HandlerAction {
 			Action tmp = done.getActionAt(i);
 			tmp.setPos(tmp.getPos() - a.getLength());
 		}
+		undone.addAction(a);
 	}
 	
 	//Seriously fuck this method
 	public boolean canMultipleUndo(int[] indices){
-		
 		for(int start= done.size() - indices[0] - 1; start < done.size(); start++){
 			Action a = this.getDoneAction(start);
 			if(!a.canChangeBelow()){
 				boolean b = false;
 				for(int i : indices){
 					if(i == done.size() - done.getIndex(a) - 1)
+						b = true;
+				}
+				if(!b)
+					return false;
+			}
+		}
+
+		return true;
+	}
+	
+	public boolean canMultipleRedo(int[] indices){
+		for(int start= undone.size() - indices[0] - 1; start < undone.size(); start++){
+			Action a = this.getUndoneAction(start);
+			if(!a.canChangeBelow()){
+				boolean b = false;
+				for(int i : indices){
+					if(i == undone.size() - undone.getIndex(a) - 1)
 						b = true;
 				}
 				if(!b)

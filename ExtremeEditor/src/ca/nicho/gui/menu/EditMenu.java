@@ -69,7 +69,7 @@ public class EditMenu extends JMenu implements ActionListener{
 					e1.printStackTrace();
 				}
 		}else if(src.equals(undo)){
-			handler.getParent().undo();
+			handler.undo();
 		}
 	}
 

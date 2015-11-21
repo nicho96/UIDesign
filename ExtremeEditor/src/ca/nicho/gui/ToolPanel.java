@@ -85,9 +85,9 @@ public class ToolPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource().equals(undo))
-			handler.getParent().undo();
+			handler.undo();
 		else if(e.getSource().equals(redo))
-			handler.getParent().redo();
+			handler.redo();
 		else if(e.getSource().equals(history))
 			actions.toggle();
 		

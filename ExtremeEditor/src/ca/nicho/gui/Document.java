@@ -46,24 +46,6 @@ public class Document extends JTextPane{
 		}
 	}
 	
-	public void undo(){
-		
-		if(handler.getDoneSize() == 0)
-			return;
-		Action a = handler.popDone();
-		a.undoAction();
-		handler.addUndoneAction(a);
-		
-	}
-	
-	public void redo(){
-		if(handler.getUndoneSize() == 0)
-			return;
-		Action a = handler.popUndone();
-		a.redoAction();
-		handler.addDoneAction(a);
-	}
-	
 	public void setHandler(HandlerAction handler){
 		this.handler = handler;
 		this.addKeyListener(new Keystrokes(handler));
