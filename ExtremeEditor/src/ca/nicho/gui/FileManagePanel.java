@@ -44,7 +44,7 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		open.setIcon(openIcon);
 		open.addActionListener(this);
 		open.setToolTipText("open");
-		open.setBorder(BorderFactory.createEmptyBorder());
+		open.setBorder(BorderFactory.createEtchedBorder());
 		open.setContentAreaFilled(false);
 		
 		img = saveIcon.getImage();
@@ -53,17 +53,14 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		save = new JButton(saveIcon);
 		save.setContentAreaFilled(false);
 		save.addActionListener(this);
-		save.setBorder(BorderFactory.createEmptyBorder());
-		save.setBorder(BorderFactory.createEmptyBorder());
+		save.setBorder(BorderFactory.createEtchedBorder());
 		save.setToolTipText("save") ;
-
-		
 
 		Image deleteImg = deleteIcon.getImage();
 		deleteImg = deleteImg.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
 		deleteIcon.setImage(deleteImg);
 		delete = new JButton(deleteIcon);
-		delete.setBorder(BorderFactory.createEmptyBorder(-5, -15, 0, -15));
+		delete.setBorder(BorderFactory.createEtchedBorder());
 		delete.setContentAreaFilled(false);
 		delete.setToolTipText("delete");
 		delete.addActionListener(this);
@@ -72,12 +69,12 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		SpringLayout.Constraints saveC = new SpringLayout.Constraints();
 		SpringLayout.Constraints deleteC = new SpringLayout.Constraints();
 		
-		this.setBackground(new Color(166,177,178));
+		this.setBackground(new Color(203,203,203));
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(open);
 		this.add(save);
 		this.add(delete);
-		this.setPreferredSize(new Dimension(100,50));
+		this.setPreferredSize(new Dimension(105,40));
 	}
 	
 	@Override

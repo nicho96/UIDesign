@@ -43,7 +43,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 		undo.setIcon(undoIcon);
 		undo.addActionListener(this);
 		undo.setToolTipText("Undo (Ctrl + Z)");
-		undo.setBorder(BorderFactory.createEmptyBorder());
+		undo.setBorder(BorderFactory.createEtchedBorder());
 		undo.setContentAreaFilled(false);
 		
 		img = redoIcon.getImage();
@@ -52,8 +52,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 		redo = new JButton(redoIcon);
 		redo.setContentAreaFilled(false);
 		redo.addActionListener(this);
-		redo.setBorder(BorderFactory.createEmptyBorder());
-		redo.setBorder(BorderFactory.createEmptyBorder());
+		redo.setBorder(BorderFactory.createEtchedBorder());
 		redo.setToolTipText("Redo (HotKey tbd)") ;
 
 		
@@ -61,19 +60,19 @@ public class ToolPanel extends JPanel implements ActionListener{
 		histImg = histImg.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		historyIcon.setImage(histImg);
 		history = new JButton(historyIcon);
-		history.setBorder(BorderFactory.createEmptyBorder(3, -15, 0, -15));
+		history.setBorder(BorderFactory.createEtchedBorder());
 		history.setContentAreaFilled(false);
 		history.setToolTipText("Undo/Redo History");
 		history.addActionListener(this);
 
 		
 		
-		this.setBackground(new Color(166,177,178));
+		this.setBackground(new Color(203,203,203));
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(history);
 		this.add(undo);
 		this.add(redo);
-		this.setPreferredSize(new Dimension(100,50));
+		this.setPreferredSize(new Dimension(105,40));
 	}
 	
 	@Override

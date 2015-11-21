@@ -42,7 +42,7 @@ public class CPPanel extends JPanel implements ActionListener{
 		copy.setIcon(copyIcon);
 		copy.addActionListener(this);
 		copy.setToolTipText("copy (Ctrl + Z)");
-		copy.setBorder(BorderFactory.createEmptyBorder());
+		copy.setBorder(BorderFactory.createEtchedBorder());
 		copy.setContentAreaFilled(false);
 		
 		img = pasteIcon.getImage();
@@ -51,8 +51,7 @@ public class CPPanel extends JPanel implements ActionListener{
 		paste = new JButton(pasteIcon);
 		paste.setContentAreaFilled(false);
 		paste.addActionListener(this);
-		paste.setBorder(BorderFactory.createEmptyBorder());
-		paste.setBorder(BorderFactory.createEmptyBorder());
+		paste.setBorder(BorderFactory.createEtchedBorder());
 		paste.setToolTipText("paste (HotKey tbd)");
 
 		
@@ -61,19 +60,19 @@ public class CPPanel extends JPanel implements ActionListener{
 		cutImg = cutImg.getScaledInstance(46, 46, java.awt.Image.SCALE_SMOOTH);
 		cutIcon.setImage(cutImg);
 		cut = new JButton(cutIcon);
-		cut.setBorder(BorderFactory.createEmptyBorder(-5, -15, 0, -15));
+		cut.setBorder(BorderFactory.createEtchedBorder());
 		cut.setContentAreaFilled(false);
 		cut.setToolTipText("cut");
 		cut.addActionListener(this);
 
 		
 		
-		this.setBackground(new Color(166,177,178));
+		this.setBackground(new Color(203,203,203));
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(cut);
 		this.add(copy);
 		this.add(paste);
-		this.setPreferredSize(new Dimension(100,50));
+		this.setPreferredSize(new Dimension(105,40));
 	}
 	
 	@Override
