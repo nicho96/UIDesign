@@ -79,9 +79,15 @@ public class HandlerAction {
 		int index = undone.removeAction(a);
 		wasModified = true;
 		a.redoAction();
-		for(int i = index; i < done.size(); i++){
+		for(int i = 0; i < undone.size(); i++){
+			Action tmp = undone.getActionAt(i);
+			if(a.getPos() < tmp.getPos())
+				tmp.setPos(tmp.getPos() - a.getLength());
+		}
+		for(int i = 0; i < done.size(); i++){
 			Action tmp = done.getActionAt(i);
-			tmp.setPos(tmp.getPos() + a.getLength());
+			if(a.getPos() <= tmp.getPos())
+				tmp.setPos(tmp.getPos() + a.getLength());
 		}
 		
 		done.addAction(a);
@@ -91,9 +97,15 @@ public class HandlerAction {
 		int index = done.removeAction(a);
 		wasModified = true;
 		a.undoAction();
-		for(int i = index; i < done.size(); i++){
+		for(int i = 0; i < done.size(); i++){
 			Action tmp = done.getActionAt(i);
-			tmp.setPos(tmp.getPos() - a.getLength());
+			if(a.getPos() < tmp.getPos())
+				tmp.setPos(tmp.getPos() - a.getLength());
+		}
+		for(int i = 0; i < undone.size(); i++){
+			Action tmp = undone.getActionAt(i);
+			if(a.getPos() <= tmp.getPos())
+				tmp.setPos(tmp.getPos() + a.getLength());
 		}
 		undone.addAction(a);
 	}
@@ -117,19 +129,10 @@ public class HandlerAction {
 	}
 	
 	public boolean canMultipleRedo(int[] indices){
-		for(int start= undone.size() - indices[0] - 1; start < undone.size(); start++){
-			Action a = this.getUndoneAction(start);
-			if(!a.canChangeBelow()){
-				boolean b = false;
-				for(int i : indices){
-					if(i == undone.size() - undone.getIndex(a) - 1)
-						b = true;
-				}
-				if(!b)
-					return false;
-			}
+		for(int i = 0; i < indices.length; i++){
+			if(indices[i] != i)
+				return false;
 		}
-
 		return true;
 	}
 	

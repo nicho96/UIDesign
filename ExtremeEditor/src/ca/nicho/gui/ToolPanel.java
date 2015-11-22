@@ -43,7 +43,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 		undo.setToolTipText("Undo (Ctrl + Z)");
 		undo.setBorder(BorderFactory.createEmptyBorder());
 		undo.setContentAreaFilled(false);
-		
+			
 		img = redoIcon.getImage();
 		Image redoImg = img.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
 		redoIcon = new ImageIcon(redoImg);

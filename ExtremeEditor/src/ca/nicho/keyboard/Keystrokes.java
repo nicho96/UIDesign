@@ -22,6 +22,7 @@ public class Keystrokes implements KeyListener{
 	private ActionDelete delete;
 	
 	private boolean backspace;
+	private int lastCaretPos = 0;
 	
 	public Keystrokes(HandlerAction handler){
 		this.handler = handler;
@@ -30,6 +31,17 @@ public class Keystrokes implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
+		int pos = handler.getParent().getCaretPosition();
+
+		System.out.println(pos);
+		
+		if(pos != lastCaretPos + 1){
+			insert = null;
+			delete = null;
+		}
+		
+		lastCaretPos = pos;
+		
 		if(isCtrlPressed || isAltPressed)
 			return;
 		
@@ -37,9 +49,7 @@ public class Keystrokes implements KeyListener{
 			insert = null;
 			handler.wasModified = false;
 		}
-		
-		int pos = handler.getParent().getCaretPosition();
-		
+				
 		if(backspace && (int)e.getKeyChar() != 8){
 			backspace = false;
 			delete = null;

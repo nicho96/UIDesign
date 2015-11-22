@@ -93,17 +93,13 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 			if(!handler.getDoneAction(i).canChangeBelow() && doneLimit < 0)
 				doneLimit = i;
 		}
-		
-		int undoneLimit = -1;
-		
+				
 		for(int i = handler.getUndoneSize() - 1; i >= 0; i--){
 			undoneList.addElement(handler.getUndoneAction(i));
-			if(!handler.getUndoneAction(i).canChangeBelow() && doneLimit < 0)
-				undoneLimit = i;
 		}
 		
 		doneRenderer.stopInd = handler.getDoneSize() - doneLimit - 1;
-		undoneRenderer.stopInd = handler.getUndoneSize() - undoneLimit - 1;
+		undoneRenderer.stopInd = 0;
 		
 	}
 
@@ -123,11 +119,15 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2){
 			if(e.getSource().equals(listDoneDisplay)){
-				handler.undoAction(doneList.get(listDoneDisplay.getSelectedIndex()));
-				update();
+				if(listDoneDisplay.getSelectedIndex() <= doneRenderer.stopInd){
+					handler.undoAction(doneList.get(listDoneDisplay.getSelectedIndex()));
+					update();
+				}
 			}else if(e.getSource().equals(listUndoneDisplay)){
-				handler.redoAction(undoneList.get(listUndoneDisplay.getSelectedIndex()));
-				update();
+				if(listUndoneDisplay.getSelectedIndex() <= undoneRenderer.stopInd){
+					handler.redoAction(undoneList.get(listUndoneDisplay.getSelectedIndex()));
+					update();
+				}
 			}
 		}
 	}
@@ -160,7 +160,7 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 							handler.redoAction(undoneList.getElementAt(i));
 						}
 					}else{
-						JOptionPane.showMessageDialog(this, "Error: Deletions above any other modifications must be selected to perform this action.");
+						JOptionPane.showMessageDialog(this, "Error: Undo actions must be done in order as they are listed.");
 					}
 				}
 			}
