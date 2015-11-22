@@ -63,6 +63,7 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		    }
 		});
 		
+		
 		img = saveIcon.getImage();
 		Image saveImg = img.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
 		saveIcon = new ImageIcon(saveImg);
@@ -110,10 +111,6 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		        delete.setBackground(UIManager.getColor("control"));
 		    }
 		});
-
-		SpringLayout.Constraints openC = new SpringLayout.Constraints();
-		SpringLayout.Constraints saveC = new SpringLayout.Constraints();
-		SpringLayout.Constraints deleteC = new SpringLayout.Constraints();
 		
 		this.setBackground(new Color(203,203,203));
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
