@@ -9,7 +9,6 @@ public class ActionHistoryFrame extends JDialog{
 	public ActionHistoryFrame(ExtremeEditorGUI frame, HistoryPanel history){
 		super(frame, false);
 		this.setBounds(frame.getWidth() - 300, 150, 300, frame.getHeight() - 150);
-				
 		this.history = history;		
 		this.add(history);
 		this.setTitle("Undo/Redo History");

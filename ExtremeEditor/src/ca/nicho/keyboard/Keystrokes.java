@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.text.BadLocationException;
 
+import ca.nicho.action.Action;
 import ca.nicho.action.ActionDelete;
 import ca.nicho.action.ActionType;
 import ca.nicho.action.HandlerAction;
@@ -22,7 +23,6 @@ public class Keystrokes implements KeyListener{
 	private ActionDelete delete;
 	
 	private boolean backspace;
-	private int lastCaretPos = 0;
 	
 	public Keystrokes(HandlerAction handler){
 		this.handler = handler;
@@ -31,16 +31,12 @@ public class Keystrokes implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
-		int pos = handler.getParent().getCaretPosition();
-
-		System.out.println(pos);
+	int pos = handler.getParent().getCaretPosition();
 		
-		if(pos != lastCaretPos + 1){
+		if(handler.caretMove){
 			insert = null;
 			delete = null;
 		}
-		
-		lastCaretPos = pos;
 		
 		if(isCtrlPressed || isAltPressed)
 			return;
@@ -66,13 +62,15 @@ public class Keystrokes implements KeyListener{
 				if(doc.getSelectedText() != null){
 					text = doc.getSelectedText();
 					doc.getDocument().remove(Math.min(doc.getSelectionStart(), doc.getSelectionEnd()), text.length());
-					handler.addDoneAction(new ActionDelete(pos, handler, text));
+					Action a = new ActionDelete(pos, handler, text);
+					handler.addDoneAction(a);
+			
 				}else{
 					if(pos > 0){
 						pos -= 1;
 						text = doc.getDocument().getText(pos, 1);
 						doc.getDocument().remove(pos, 1);
-						if(!backspace){
+						if(!backspace || delete == null){
 							backspace = true;
 							delete = new ActionDelete(pos, handler, text);
 							handler.addDoneAction(delete);
@@ -87,6 +85,8 @@ public class Keystrokes implements KeyListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			handler.caretMove = false;
+			handler.updateDone(-1);
 		}
 		
 		
@@ -97,8 +97,15 @@ public class Keystrokes implements KeyListener{
 					insert = new ActionType(pos - 1, handler);
 				else
 					insert = new ActionType(pos, handler);
+				
 				handler.addDoneAction(insert);
 				lastString = "";
+								
+				if(handler.caretMove){
+					handler.caretMove = false;
+					insert.setCanChange(false);
+				}
+				
 			}
 			
 			lastString += e.getKeyChar();
@@ -108,6 +115,7 @@ public class Keystrokes implements KeyListener{
 				insert = null;
 			}
 		}		
+		handler.updateDone(1);
 		handler.getFrame().getHistoryFrame().update();
 	}
 

@@ -94,12 +94,20 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 				doneLimit = i;
 		}
 				
+		boolean b = true;
+		int index = 0;
+		Action past = null;
 		for(int i = handler.getUndoneSize() - 1; i >= 0; i--){
-			undoneList.addElement(handler.getUndoneAction(i));
+			Action a = handler.getUndoneAction(i);
+			undoneList.addElement(a);
+			if(past != null && !past.getClass().equals(a.getClass()) && b){
+				index = i;
+				b = false;
+			}
+			past = a;
 		}
-		
-		doneRenderer.stopInd = handler.getDoneSize() - doneLimit - 1;
-		undoneRenderer.stopInd = 0;
+		doneRenderer.stopInd = doneList.size() - doneLimit - 1;
+		undoneRenderer.stopInd = undoneList.size() - index - 2;
 		
 	}
 
@@ -139,16 +147,15 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		if(src.equals(preview))
-			new PreviewPanel(handler.getParent());
 		
-		if(src.equals(apply)){
+		if(src.equals(apply) || src.equals(preview)){
 			if(undoPanel.isShowing()){
 				if(listDoneDisplay.getSelectedIndices().length != 0){
 					if(handler.canMultipleUndo(listDoneDisplay.getSelectedIndices())){
-						for(int i : listDoneDisplay.getSelectedIndices()){
-							handler.undoAction(doneList.getElementAt(i));
-						}
+						if(src.equals(preview))
+							handler.preview(doneList, listDoneDisplay);
+						else
+							handler.bulkUndo(doneList, listDoneDisplay);
 					}else{
 						JOptionPane.showMessageDialog(this, "Error: Deletions above any other modifications must be selected to perform this action.");
 					}

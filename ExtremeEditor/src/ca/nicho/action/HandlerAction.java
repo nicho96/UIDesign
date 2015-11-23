@@ -1,9 +1,12 @@
 package ca.nicho.action;
 
-import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JTextPane;
 
 import ca.nicho.gui.ActionHistoryFrame;
 import ca.nicho.gui.Document;
+import ca.nicho.gui.PreviewPanel;
 
 public class HandlerAction {
 
@@ -14,6 +17,7 @@ public class HandlerAction {
 	private Document parent;
 	
 	public boolean wasModified = false;
+	public boolean caretMove = false;
 	
 	public HandlerAction(Document parent, ActionHistoryFrame frame){
 		this.frame = frame;
@@ -25,8 +29,19 @@ public class HandlerAction {
 	}
 	
 	public void addDoneAction(Action a){
+		
 		done.addAction(a);
 		frame.getHistoryFrame().update();
+	}
+	
+	public void updateDone(int shift){
+		Action a = done.peek();
+		for(int i = 0; i < done.size(); i++){
+			Action tmp = done.getActionAt(i);
+			if(a.getPos() < tmp.getPos()){
+				tmp.setPos(tmp.getPos() + shift);
+			}
+		}
 	}
 	
 	public void addUndoneAction(Action a){
@@ -128,6 +143,12 @@ public class HandlerAction {
 		return true;
 	}
 	
+	public void bulkUndo(DefaultListModel<Action> doneList, JList<Action> listDoneDisplay){
+		for(int i : listDoneDisplay.getSelectedIndices()){
+			this.undoAction(doneList.getElementAt(i));
+		}
+	}
+	
 	public boolean canMultipleRedo(int[] indices){
 		for(int i = 0; i < indices.length; i++){
 			if(indices[i] != i)
@@ -138,5 +159,17 @@ public class HandlerAction {
 	
 	public Action popUndone(){
 		return undone.pop();
+	}
+	
+	public void preview(DefaultListModel<Action> doneList, JList<Action> listDoneDisplay){
+		Document tmp = parent;
+		ActionStack tmpDone = done.copy();
+		ActionStack tmpUndone = undone.copy();
+		parent = new PreviewPanel(tmp, this).getTextArea();
+		bulkUndo(doneList, listDoneDisplay);
+		done = tmpDone;
+		undone = tmpUndone;
+		parent = tmp;
+		frame.getHistoryFrame().update();
 	}
 }

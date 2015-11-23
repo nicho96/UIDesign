@@ -38,6 +38,11 @@ public class ActionDelete extends Action{
 		return s;
 	}
 
+	@Override
+	public Action copy() {
+		return new ActionDelete(this.getPos(), handler, value);
+	}
+
 	
 	
 }

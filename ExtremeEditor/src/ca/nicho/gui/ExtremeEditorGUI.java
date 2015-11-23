@@ -42,7 +42,6 @@ public class ExtremeEditorGUI extends JFrame{
 		textArea.setHandler(handler);
 		historyPanel.setHandler(handler);
 		
-		System.out.println(historyDialog);
 		this.headerPanel = new JPanel();
 		this.headerPanel.setLayout(new BorderLayout());
 		this.menuPanel = new MenuPanel(handler);

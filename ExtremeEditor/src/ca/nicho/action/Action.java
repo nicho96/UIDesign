@@ -32,6 +32,12 @@ public abstract class Action {
 		return stackChange;
 	}
 	
+	public void setCanChange(boolean b){
+		this.stackChange = b;
+	}
+	
+	public abstract Action copy();
+	
 	public abstract void undoAction();
 	
 	public abstract void redoAction();

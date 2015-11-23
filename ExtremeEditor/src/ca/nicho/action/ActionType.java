@@ -30,5 +30,10 @@ public class ActionType extends Action{
 		return s;
 	}
 
+	public Action copy(){
+		ActionType a = new ActionType(this.getPos(), handler);
+		a.setString(value);
+		return a;
+	}
 	
 }

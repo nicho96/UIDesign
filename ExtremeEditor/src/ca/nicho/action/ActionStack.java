@@ -28,7 +28,9 @@ public class ActionStack {
 	}
 	
 	public Action getActionAt(int i){
-		return stack.get(i);
+		if(i < size() && i >= 0)
+			return stack.get(i);
+		return null;
 	}
 	
 	public Action removeAction(int i){
@@ -52,6 +54,15 @@ public class ActionStack {
 				vals.add(i);
 		}
 		return vals;
+	}
+	
+	public ActionStack copy(){
+		ActionStack copy = new ActionStack();
+		
+		for(int i = 0; i < stack.size(); i++)
+			copy.addAction(stack.get(i).copy());
+		
+		return copy;
 	}
 	
 }
