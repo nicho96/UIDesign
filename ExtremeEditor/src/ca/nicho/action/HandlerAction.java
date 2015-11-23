@@ -1,5 +1,10 @@
 package ca.nicho.action;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTextPane;
@@ -56,14 +61,17 @@ public class HandlerAction {
 	}
 	
 	public void undo(){
-		undoAction(done.peek());
-		frame.getHistoryFrame().update();
-		
+		if(!done.isEmpty()){
+			undoAction(done.peek());
+			frame.getHistoryFrame().update();
+		}
 	}
 	
 	public void redo(){
-		redoAction(undone.peek());
-		frame.getHistoryFrame().update();
+		if(!undone.isEmpty()){
+			redoAction(undone.peek());
+			frame.getHistoryFrame().update();
+		}
 	}
 	
 	public Action getDoneAction(int i){
@@ -171,5 +179,36 @@ public class HandlerAction {
 		undone = tmpUndone;
 		parent = tmp;
 		frame.getHistoryFrame().update();
+	}
+	
+	public void saveHistoryToFile(String pathName){
+		try {
+			File f = new File(pathName + ".hist");
+			if(!f.exists())
+				f.createNewFile();
+			PrintWriter write = new PrintWriter(f);
+			
+			write.println("DONE");
+			
+			for(int i = 0; i < done.size(); i++){
+				Action a = done.getActionAt(i);
+				write.println(a.getClass().getName() + ":" + a.getPos() + ":" + a.getValue());
+			}
+			
+			write.println("UNDONE");
+			
+			for(int i = 0; i < undone.size(); i++){
+				Action a = undone.getActionAt(i);
+				write.println(a.getClass().getName() + ":" + a.getPos() + ":" + a.getValue());
+			}
+			
+			write.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

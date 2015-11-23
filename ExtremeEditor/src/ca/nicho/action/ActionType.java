@@ -2,8 +2,6 @@ package ca.nicho.action;
 
 
 public class ActionType extends Action{
-
-	private String value;
 	
 	public ActionType(int pos, HandlerAction handler){
 		super(pos, 0, true, handler, "Insertion");
@@ -26,7 +24,7 @@ public class ActionType extends Action{
 	}
 	
 	public String toString() {
-		String s = name + " (" + value.length() + " inserted): " + value + " " + pos;
+		String s = name + " (" + value.length() + " inserted): " + value;
 		return s;
 	}
 

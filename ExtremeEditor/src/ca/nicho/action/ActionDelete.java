@@ -1,8 +1,6 @@
 package ca.nicho.action;
 
 public class ActionDelete extends Action{
-
-	private String value;
 	
 	public ActionDelete(int pos, HandlerAction handler, String value){
 		super(pos, value.length(), false, handler, "Deletion");
@@ -34,7 +32,7 @@ public class ActionDelete extends Action{
 	}
 
 	public String toString() {
-		String s = name + " (" + value.length() + " deleted): " + value + " " + pos;
+		String s = name + " (" + value.length() + " deleted): " + value;
 		return s;
 	}
 

@@ -6,6 +6,7 @@ public abstract class Action {
 	protected int pos, length;
 	protected HandlerAction handler;
 	private boolean stackChange;
+	protected String value;
 	protected String name;
 
 	public Action(int pos, int length, boolean b, HandlerAction handler, String name){
@@ -34,6 +35,10 @@ public abstract class Action {
 	
 	public void setCanChange(boolean b){
 		this.stackChange = b;
+	}
+	
+	public String getValue(){
+		return value;
 	}
 	
 	public abstract Action copy();

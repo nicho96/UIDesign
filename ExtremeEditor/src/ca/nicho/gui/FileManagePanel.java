@@ -123,13 +123,13 @@ public class FileManagePanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-	/*	if(e.getSource().equals(open))
-			handler.getParent().open();
-		else if(e.getSource().equals(save))
-			handler.getParent().save();
-		else if(e.getSource().equals(delete))
-			handler.getParent().delete();
-		*/	
+	if(e.getSource().equals(open)){
+		//handler.getParent().open();
+	}else if(e.getSource().equals(save)){
+		handler.saveHistoryToFile("test");
+	}else if(e.getSource().equals(delete)){
+		//handler.getParent().delete();	
+	}
 		
 	}
 	
