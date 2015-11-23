@@ -28,6 +28,9 @@ public class ToolPanel extends JPanel implements ActionListener{
 	
 	private JButton undo, redo, history;
 	
+	public Color idle = Color.RED;
+	public Color pressed = Color.GREEN;
+	
 	public ToolPanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout(1,3));
 		this.handler = handler;
@@ -49,13 +52,13 @@ public class ToolPanel extends JPanel implements ActionListener{
 
 		undo.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        undo.setBackground(Color.RED);
+		        undo.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	undo.setBackground(Color.BLACK);
+		    	undo.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	undo.setBackground(Color.RED);
+		    	undo.setBackground(idle);
 		    }
 		    
 
@@ -76,13 +79,13 @@ public class ToolPanel extends JPanel implements ActionListener{
 		
 		redo.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        redo.setBackground(Color.RED);
+		        redo.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	redo.setBackground(Color.BLACK);
+		    	redo.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	redo.setBackground(Color.RED);
+		    	redo.setBackground(idle);
 		    }
 
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -102,14 +105,14 @@ public class ToolPanel extends JPanel implements ActionListener{
 		
 		history.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        history.setBackground(Color.RED);
+		        history.setBackground(idle);
 		    }
 		    
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	history.setBackground(Color.BLACK);
+		    	history.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	history.setBackground(Color.RED);
+		    	history.setBackground(idle);
 		    }
 		    	
 		    public void mouseExited(java.awt.event.MouseEvent evt) {

@@ -30,6 +30,9 @@ public class FileManagePanel extends JPanel implements ActionListener{
 	
 	private JButton open, save, delete;
 	
+	public Color idle = Color.RED;
+	public Color pressed = Color.GREEN;
+	
 	public FileManagePanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout());
 		this.handler = handler;
@@ -50,13 +53,13 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		
 		open.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        open.setBackground(Color.RED);
+		        open.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	open.setBackground(Color.BLACK);
+		    	open.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	open.setBackground(Color.RED);
+		    	open.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		        open.setBackground(UIManager.getColor("control"));
@@ -75,13 +78,13 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		
 		save.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        save.setBackground(Color.RED);
+		        save.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	save.setBackground(Color.BLACK);
+		    	save.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	save.setBackground(Color.RED);
+		    	save.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		        save.setBackground(UIManager.getColor("control"));
@@ -99,13 +102,13 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		
 		delete.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        delete.setBackground(Color.RED);
+		        delete.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	delete.setBackground(Color.BLACK);
+		    	delete.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	delete.setBackground(Color.RED);
+		    	delete.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		        delete.setBackground(UIManager.getColor("control"));

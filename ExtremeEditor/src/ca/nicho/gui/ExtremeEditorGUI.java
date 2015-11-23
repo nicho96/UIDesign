@@ -35,7 +35,7 @@ public class ExtremeEditorGUI extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Extreme Editor Plus");
 
-		this.textArea = new Document();
+		this.textArea = new Document(this);
 		this.historyPanel = new HistoryPanel();
 		this.historyDialog = new ActionHistoryFrame(this, historyPanel);
 		handler = new HandlerAction(textArea, historyDialog);

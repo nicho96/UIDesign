@@ -173,7 +173,7 @@ public class HandlerAction {
 		Document tmp = parent;
 		ActionStack tmpDone = done.copy();
 		ActionStack tmpUndone = undone.copy();
-		parent = new PreviewPanel(tmp, this).getTextArea();
+		parent = new PreviewPanel(tmp, this, listDoneDisplay, doneList).getTextArea();
 		bulkUndo(doneList, listDoneDisplay);
 		done = tmpDone;
 		undone = tmpUndone;

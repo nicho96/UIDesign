@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.text.BadLocationException;
@@ -16,13 +17,15 @@ import ca.nicho.keyboard.Keystrokes;
 public class Document extends JTextPane implements KeyListener, MouseListener{
 
 	private HandlerAction handler;
+	private ExtremeEditorGUI mainframe;
 	
-	public Document(){		
+	public Document(ExtremeEditorGUI mainframe){		
 		KeyStroke ctrlV = KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK);
 		this.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
 		this.setCaretPosition(this.getDocument().getLength());
 		this.addKeyListener(this);
 		this.addMouseListener(this);
+		this.mainframe = mainframe;
 	}
 	
 	public void printText(){
@@ -106,6 +109,10 @@ public class Document extends JTextPane implements KeyListener, MouseListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public ExtremeEditorGUI getTopFrame(){
+		return mainframe;
 	}
 	
 }

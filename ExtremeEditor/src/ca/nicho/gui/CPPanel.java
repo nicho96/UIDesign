@@ -28,6 +28,9 @@ public class CPPanel extends JPanel implements ActionListener{
 	
 	private JButton copy, paste, cut;
 	
+	public Color idle = Color.RED;
+	public Color pressed = Color.GREEN;
+	
 	public CPPanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout(1,3));
 		this.handler = handler;
@@ -48,14 +51,14 @@ public class CPPanel extends JPanel implements ActionListener{
 		
 		copy.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        copy.setBackground(Color.RED);
+		        copy.setBackground(idle);
 		    }
 
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	copy.setBackground(Color.BLACK);
+		    	copy.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	copy.setBackground(Color.RED);
+		    	copy.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		        copy.setBackground(UIManager.getColor("control"));
@@ -73,13 +76,13 @@ public class CPPanel extends JPanel implements ActionListener{
 		
 		paste.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        paste.setBackground(Color.RED);
+		        paste.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	paste.setBackground(Color.BLACK);
+		    	paste.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	paste.setBackground(Color.RED);
+		    	paste.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		        paste.setBackground(UIManager.getColor("control"));
@@ -99,13 +102,13 @@ public class CPPanel extends JPanel implements ActionListener{
 		
 		cut.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		        cut.setBackground(Color.RED);
+		        cut.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
-		    	cut.setBackground(Color.BLACK);
+		    	cut.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
-		    	cut.setBackground(Color.RED);
+		    	cut.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		        cut.setBackground(UIManager.getColor("control"));
