@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -42,8 +43,24 @@ public class CPPanel extends JPanel implements ActionListener{
 		copy.setIcon(copyIcon);
 		copy.addActionListener(this);
 		copy.setToolTipText("copy (Ctrl + Z)");
-		copy.setBorder(BorderFactory.createEmptyBorder());
+		copy.setBorder(BorderFactory.createEtchedBorder());
 		copy.setContentAreaFilled(false);
+		
+		copy.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        copy.setBackground(Color.RED);
+		    }
+
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	copy.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	copy.setBackground(Color.RED);
+		    }
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        copy.setBackground(UIManager.getColor("control"));
+		    }
+		});
 		
 		img = pasteIcon.getImage();
 		Image pasteImg = img.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
@@ -51,9 +68,23 @@ public class CPPanel extends JPanel implements ActionListener{
 		paste = new JButton(pasteIcon);
 		paste.setContentAreaFilled(false);
 		paste.addActionListener(this);
-		paste.setBorder(BorderFactory.createEmptyBorder());
-		paste.setBorder(BorderFactory.createEmptyBorder());
+		paste.setBorder(BorderFactory.createEtchedBorder());
 		paste.setToolTipText("paste (HotKey tbd)");
+		
+		paste.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        paste.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	paste.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	paste.setBackground(Color.RED);
+		    }
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        paste.setBackground(UIManager.getColor("control"));
+		    }
+		});
 
 		
 
@@ -61,19 +92,34 @@ public class CPPanel extends JPanel implements ActionListener{
 		cutImg = cutImg.getScaledInstance(46, 46, java.awt.Image.SCALE_SMOOTH);
 		cutIcon.setImage(cutImg);
 		cut = new JButton(cutIcon);
-		cut.setBorder(BorderFactory.createEmptyBorder(-5, -15, 0, -15));
+		cut.setBorder(BorderFactory.createEtchedBorder());
 		cut.setContentAreaFilled(false);
 		cut.setToolTipText("cut");
 		cut.addActionListener(this);
+		
+		cut.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        cut.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	cut.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	cut.setBackground(Color.RED);
+		    }
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        cut.setBackground(UIManager.getColor("control"));
+		    }
+		});
 
 		
 		
-		this.setBackground(new Color(166,177,178));
-		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		this.setBackground(new Color(203,203,203));
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(cut);
 		this.add(copy);
 		this.add(paste);
-		this.setPreferredSize(new Dimension(60,40));
+		this.setPreferredSize(new Dimension(105,40));
 	}
 	
 	@Override

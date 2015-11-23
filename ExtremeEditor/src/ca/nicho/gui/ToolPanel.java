@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -31,8 +32,10 @@ public class ToolPanel extends JPanel implements ActionListener{
 		this.setLayout(new GridLayout(1,3));
 		this.handler = handler;
 		this.actions = actions;
-		ImageIcon undoIcon = new ImageIcon("res/undo.png");
-		ImageIcon redoIcon = new ImageIcon("res/redo.png");
+		ImageIcon undoIcon = new ImageIcon("res/undo2.png");
+		ImageIcon redoIcon = new ImageIcon("res/redo2.png");
+		ImageIcon historyIcon = new ImageIcon("res/history2.png");
+
 		
 		Image img = undoIcon.getImage();
 		Image undoImg = img.getScaledInstance( 28, 28,  java.awt.Image.SCALE_SMOOTH );
@@ -41,38 +44,88 @@ public class ToolPanel extends JPanel implements ActionListener{
 		undo.setIcon(undoIcon);
 		undo.addActionListener(this);
 		undo.setToolTipText("Undo (Ctrl + Z)");
-		undo.setBorder(BorderFactory.createEmptyBorder());
+		undo.setBorder(BorderFactory.createEtchedBorder());
 		undo.setContentAreaFilled(false);
-			
+
+		undo.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        undo.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	undo.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	undo.setBackground(Color.RED);
+		    }
+		    
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        undo.setBackground(UIManager.getColor("control"));
+		    }
+		});
+		
+		
 		img = redoIcon.getImage();
 		Image redoImg = img.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
 		redoIcon = new ImageIcon(redoImg);
 		redo = new JButton(redoIcon);
 		redo.setContentAreaFilled(false);
 		redo.addActionListener(this);
-		redo.setBorder(BorderFactory.createEmptyBorder());
-		redo.setBorder(BorderFactory.createEmptyBorder());
-		redo.setToolTipText("Redo (HotKey tbd)") ;
+		redo.setBorder(BorderFactory.createEtchedBorder());
+		redo.setToolTipText("Redo (HotKey tbd)");
+		
+		redo.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        redo.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	redo.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	redo.setBackground(Color.RED);
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        redo.setBackground(UIManager.getColor("control"));
+		    }
+		});
 
 		
-		ImageIcon historyIcon = new ImageIcon("res/history.png");
 		Image histImg = historyIcon.getImage();
-		histImg = histImg.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
+		histImg = histImg.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		historyIcon.setImage(histImg);
 		history = new JButton(historyIcon);
-		history.setBorder(BorderFactory.createEmptyBorder(-5, -15, 0, -15));
+		history.setBorder(BorderFactory.createEtchedBorder());
 		history.setContentAreaFilled(false);
 		history.setToolTipText("Undo/Redo History");
 		history.addActionListener(this);
+		
+		history.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        history.setBackground(Color.RED);
+		    }
+		    
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	history.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	history.setBackground(Color.RED);
+		    }
+		    	
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        history.setBackground(UIManager.getColor("control"));
+		    }
+		});
 
 		
 		
-		this.setBackground(new Color(166,177,178));
-		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		this.setBackground(new Color(203,203,203));
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(history);
 		this.add(undo);
 		this.add(redo);
-		this.setPreferredSize(new Dimension(60,40));
+		this.setPreferredSize(new Dimension(105,40));
+		
 	}
 	
 	@Override

@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -44,8 +45,24 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		open.setIcon(openIcon);
 		open.addActionListener(this);
 		open.setToolTipText("open");
-		open.setBorder(BorderFactory.createEmptyBorder());
+		open.setBorder(BorderFactory.createEtchedBorder());
 		open.setContentAreaFilled(false);
+		
+		open.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        open.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	open.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	open.setBackground(Color.RED);
+		    }
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        open.setBackground(UIManager.getColor("control"));
+		    }
+		});
+		
 		
 		img = saveIcon.getImage();
 		Image saveImg = img.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
@@ -53,31 +70,54 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		save = new JButton(saveIcon);
 		save.setContentAreaFilled(false);
 		save.addActionListener(this);
-		save.setBorder(BorderFactory.createEmptyBorder());
-		save.setBorder(BorderFactory.createEmptyBorder());
+		save.setBorder(BorderFactory.createEtchedBorder());
 		save.setToolTipText("save") ;
-
 		
+		save.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        save.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	save.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	save.setBackground(Color.RED);
+		    }
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        save.setBackground(UIManager.getColor("control"));
+		    }
+		});
 
 		Image deleteImg = deleteIcon.getImage();
 		deleteImg = deleteImg.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
 		deleteIcon.setImage(deleteImg);
 		delete = new JButton(deleteIcon);
-		delete.setBorder(BorderFactory.createEmptyBorder(-5, -15, 0, -15));
+		delete.setBorder(BorderFactory.createEtchedBorder());
 		delete.setContentAreaFilled(false);
 		delete.setToolTipText("delete");
 		delete.addActionListener(this);
-
-		SpringLayout.Constraints openC = new SpringLayout.Constraints();
-		SpringLayout.Constraints saveC = new SpringLayout.Constraints();
-		SpringLayout.Constraints deleteC = new SpringLayout.Constraints();
 		
-		this.setBackground(new Color(166,177,178));
-		this.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		delete.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        delete.setBackground(Color.RED);
+		    }
+		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	delete.setBackground(Color.BLACK);
+		    }
+		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	delete.setBackground(Color.RED);
+		    }
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        delete.setBackground(UIManager.getColor("control"));
+		    }
+		});
+		
+		this.setBackground(new Color(203,203,203));
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		this.add(open);
 		this.add(save);
 		this.add(delete);
-		this.setPreferredSize(new Dimension(60,40));
+		this.setPreferredSize(new Dimension(105,40));
 	}
 	
 	@Override
