@@ -1,0 +1,16 @@
+
+When starting the Undo/Redo project, there was an idea to do it with a Picture editor instead of the typical Text editor. The idea was, due to having a static image location it would be much easier to redo an undone item, without having to consider if the position of a character was going to interfere with re-insertion if, for example, you place an additional word in front of the deleted character, moving the position into the middle of a word (and not a blank space anymore).
+The idea wasn’t followed through, and instead the typical word processor path was taken. That was later specified into a coding IDE sort of tool. This gave some opportunity to implement specific features, and avoid more advanced features such as rich text.
+
+Early prototype had a 3 stage undo panel system, where it was the typical hidden, using either arrows or shortcuts to undo-redo, onto the second stage that was a pop-out side pane, which would push the working window to the right, shirking it, but listing the undo/redo history in a clear manner.
+The 3rd stage was instead of the pane pushing the work area to the right and shrink, was to instead have an entire second window for the preview, resizable and not affecting the work window. It would list the full undo/redo history, and the early idea had a preview pane idea as well, to preview the changes that would be made.
+This window would be shown/hidden at the press of a button, and not change the work window, unlike the sliding history pane which slid everything to fit.
+
+The final version did not implement the sliding pane, and instead has a show/hide pop out window, keeping the history of actions.
+
+The preview message system on the pop-out window also changed a fair bit, from implementation to the description of how it was listed. Early iterations had the char limit set to 10, and it listed additional characters (or total?) afterwards. That was changed to list total Chars of the action, followed by a scrolling list of the entire action, allowing you to see the whole thing, if a user wanted to.
+
+The colours of the IDE were changed from white, to contrast certain items such as the Toolbar and workspace.
+The toolbar itself went through some iteration, starting with just a undo redo button alongside the pop-out window toggle. This was changed to have more icons and much better aesthetics, highlighting the button you hover over in red, then turning green when you click, giving a clear reaction to pushing the button. There were also early issues of the Toolbar not being uniform, one button being larger than the others. This was fixed, all buttons sharing a universal size, and grouped into related actions amongst each other.
+
+There was an extensive number of error fixing by the creator, ranging from null pointer errors to the Add/remove history window failing to update, or removing the wrong String. 
