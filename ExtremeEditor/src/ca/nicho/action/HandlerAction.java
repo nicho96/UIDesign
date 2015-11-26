@@ -169,14 +169,17 @@ public class HandlerAction {
 	}
 	
 	public void preview(DefaultListModel<Action> doneList, JList<Action> listDoneDisplay){
-		Document tmp = parent;
 		ActionStack tmpDone = done.copy();
 		ActionStack tmpUndone = undone.copy();
-		parent = new PreviewPanel(tmp, this, listDoneDisplay, doneList).getTextArea();
+		String pastText = this.getParent().getText();
+		
+		System.out.println(done.size() + " " + tmpDone.size());
+		
 		bulkUndo(doneList, listDoneDisplay);
+		new PreviewPanel(this.getParent().getText(), this, listDoneDisplay, doneList);
 		done = tmpDone;
 		undone = tmpUndone;
-		parent = tmp;
+		this.getParent().setText(pastText);
 		frame.getHistoryFrame().update();
 	}
 	

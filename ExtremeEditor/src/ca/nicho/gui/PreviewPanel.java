@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 
 import ca.nicho.action.Action;
 import ca.nicho.action.HandlerAction;
@@ -19,7 +20,7 @@ public class PreviewPanel extends JDialog implements ActionListener{
 
 	
 	private JPanel mainPanel;
-	private Document textArea;
+	private JTextPane textArea;
 	private JPanel bottomPanel;
 	private JButton apply;
 	private JButton discard;
@@ -29,9 +30,8 @@ public class PreviewPanel extends JDialog implements ActionListener{
 	private JList<Action> list;
 	private DefaultListModel<Action> model;
 	
-	public PreviewPanel(Document doc, HandlerAction handler, JList<Action> list, DefaultListModel<Action> model){
-		super(doc.getTopFrame(), "", ModalityType.APPLICATION_MODAL);
-		doc.setHandler(handler);
+	public PreviewPanel(String content, HandlerAction handler, JList<Action> list, DefaultListModel<Action> model){
+
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("PREVIEW");
@@ -42,10 +42,10 @@ public class PreviewPanel extends JDialog implements ActionListener{
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
-		
-		textArea = new Document(doc.getTopFrame());
+
+		this.textArea = new JTextPane();
+		textArea.setText(content);
 		textArea.setEditable(false);
-		textArea.setText(doc.getText());
 		mainPanel.add(new JScrollPane(textArea), BorderLayout.CENTER);
 		
 		bottomPanel = new JPanel();
@@ -58,10 +58,6 @@ public class PreviewPanel extends JDialog implements ActionListener{
 		apply.addActionListener(this);
 		discard.addActionListener(this);
 		this.setVisible(true);
-	}
-	
-	public Document getTextArea(){
-		return textArea;
 	}
 
 	@Override
