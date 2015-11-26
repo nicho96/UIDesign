@@ -150,10 +150,18 @@ public class HandlerAction {
 		return true;
 	}
 	
-	public void bulkUndo(DefaultListModel<Action> doneList, JList<Action> listDoneDisplay){
-		for(int i : listDoneDisplay.getSelectedIndices()){
+	public void bulkUndo(DefaultListModel<Action> doneList, int[] indices){
+		for(int i : indices){
 			this.undoAction(doneList.getElementAt(i));
 		}
+		frame.getHistoryFrame().update();
+	}
+	
+	public void bulkRedo(DefaultListModel<Action> doneList, int[] indices){
+		for(int i : indices){
+			this.redoAction(doneList.getElementAt(i));
+		}
+		frame.getHistoryFrame().update();
 	}
 	
 	public boolean canMultipleRedo(int[] indices){
@@ -168,15 +176,24 @@ public class HandlerAction {
 		return undone.pop();
 	}
 	
-	public void preview(DefaultListModel<Action> doneList, JList<Action> listDoneDisplay){
+	public void previewDone(DefaultListModel<Action> doneList, int[] indices){
 		ActionStack tmpDone = done.copy();
 		ActionStack tmpUndone = undone.copy();
-		String pastText = this.getParent().getText();
-		
-		System.out.println(done.size() + " " + tmpDone.size());
-		
-		bulkUndo(doneList, listDoneDisplay);
-		new PreviewPanel(this.getParent().getText(), this, listDoneDisplay, doneList);
+		String pastText = this.getParent().getText();		
+		bulkUndo(doneList, indices);
+		new PreviewPanel(this.getParent().getText(), this, indices, doneList, 0);
+		done = tmpDone;
+		undone = tmpUndone;
+		this.getParent().setText(pastText);
+		frame.getHistoryFrame().update();
+	}
+	
+	public void previewUndone(DefaultListModel<Action> doneList, int[] indices){
+		ActionStack tmpDone = done.copy();
+		ActionStack tmpUndone = undone.copy();
+		String pastText = this.getParent().getText();		
+		bulkRedo(doneList, indices);
+		new PreviewPanel(this.getParent().getText(), this, indices, doneList, 1);
 		done = tmpDone;
 		undone = tmpUndone;
 		this.getParent().setText(pastText);

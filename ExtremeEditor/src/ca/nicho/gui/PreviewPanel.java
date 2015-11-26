@@ -27,10 +27,12 @@ public class PreviewPanel extends JDialog implements ActionListener{
 	
 	private HandlerAction handler;
 	
-	private JList<Action> list;
+	private int type;
+	
+	private int[] list;
 	private DefaultListModel<Action> model;
 	
-	public PreviewPanel(String content, HandlerAction handler, JList<Action> list, DefaultListModel<Action> model){
+	public PreviewPanel(String content, HandlerAction handler, int[] list, DefaultListModel<Action> model, int type){
 
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -39,6 +41,7 @@ public class PreviewPanel extends JDialog implements ActionListener{
 		this.handler = handler;
 		this.list = list;
 		this.model = model;
+		this.type = type;
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
@@ -63,7 +66,11 @@ public class PreviewPanel extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(apply)){
-			handler.bulkUndo(model, list);
+			//Undo is type 0, Redo is 1 (or any other int)
+			if(type == 0)
+				handler.bulkUndo(model, list);
+			else
+				handler.bulkRedo(model, list);
 			this.dispose();
 		}else{
 			this.dispose();
