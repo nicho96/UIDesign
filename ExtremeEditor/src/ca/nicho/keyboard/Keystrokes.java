@@ -76,17 +76,15 @@ public class Keystrokes implements KeyListener{
 							handler.addDoneAction(delete);
 						}else{
 							delete.addText(text);
-							delete.setPos(pos);
 						}
 					}
 				}
 				
 			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.err.println(e1.getMessage() + ": " + pos);
 			}
 			handler.caretMove = false;
-			handler.updateDone(-1);
+			//handler.updateDone(-1);
 		}
 		
 		
@@ -115,7 +113,7 @@ public class Keystrokes implements KeyListener{
 				insert = null;
 			}
 		}		
-		handler.updateDone(1);
+		//handler.updateDone(1);
 		handler.getFrame().getHistoryFrame().update();
 	}
 

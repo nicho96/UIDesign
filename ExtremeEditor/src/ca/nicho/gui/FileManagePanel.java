@@ -1,24 +1,23 @@
 package ca.nicho.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.Spring;
-import javax.swing.SpringLayout;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 
 import ca.nicho.action.HandlerAction;
 
@@ -127,13 +126,62 @@ public class FileManagePanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 	if(e.getSource().equals(open)){
-		//handler.getParent().open();
+		load();
 	}else if(e.getSource().equals(save)){
-		handler.saveHistoryToFile("test");
+		save();
 	}else if(e.getSource().equals(delete)){
 		//handler.getParent().delete();	
 	}
 		
+	}
+	
+	public void save(){
+		try {
+			JFileChooser chooser = new JFileChooser();
+			chooser.showSaveDialog(this);
+			File f = chooser.getSelectedFile();
+			
+			if(f != null){
+				PrintWriter writer = new PrintWriter(f);
+				writer.print(handler.getParent().getText());
+				int i = JOptionPane.showConfirmDialog(this, "Would you like to save your undo/redo history?");
+				
+				if(i == JOptionPane.YES_OPTION){
+					handler.saveHistoryToFile(new File(f.getAbsolutePath() + ".hist"));
+				}
+				writer.close();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void load(){
+		try {
+			JFileChooser chooser = new JFileChooser();
+			chooser.showOpenDialog(this);
+			File f = chooser.getSelectedFile();
+			
+			if(f != null){
+				Scanner sc = new Scanner(f);
+				sc.useDelimiter("/z");
+				//If file is empty, prevents an EOF error
+				if(sc.hasNext())
+					handler.getParent().setText(sc.next());
+				sc.close();
+				
+				File hist = new File(f.getAbsolutePath() + ".hist");
+				
+				if(f.exists()){
+					handler.loadHistoryFile(hist);
+				}
+				
+			}
+		} catch (FileNotFoundException e) {
+			//Do nothing
+		}
 	}
 	
 }

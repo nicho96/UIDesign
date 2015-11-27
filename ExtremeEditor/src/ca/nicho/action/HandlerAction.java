@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JTextPane;
+import javax.swing.JOptionPane;
 
 import ca.nicho.gui.ActionHistoryFrame;
 import ca.nicho.gui.Document;
@@ -15,8 +15,8 @@ import ca.nicho.gui.PreviewPanel;
 
 public class HandlerAction {
 
-	private ActionStack done = new ActionStack();
-	private ActionStack undone = new ActionStack();
+	public ActionStack done = new ActionStack();
+	public ActionStack undone = new ActionStack();
 	
 	private ActionHistoryFrame frame;
 	private Document parent;
@@ -151,10 +151,18 @@ public class HandlerAction {
 		return true;
 	}
 	
-	public void bulkUndo(DefaultListModel<Action> doneList, JList<Action> listDoneDisplay){
-		for(int i : listDoneDisplay.getSelectedIndices()){
+	public void bulkUndo(DefaultListModel<Action> doneList, int[] indices){
+		for(int i : indices){
 			this.undoAction(doneList.getElementAt(i));
 		}
+		frame.getHistoryFrame().update();
+	}
+	
+	public void bulkRedo(DefaultListModel<Action> doneList, int[] indices){
+		for(int i : indices){
+			this.redoAction(doneList.getElementAt(i));
+		}
+		frame.getHistoryFrame().update();
 	}
 	
 	public boolean canMultipleRedo(int[] indices){
@@ -169,40 +177,118 @@ public class HandlerAction {
 		return undone.pop();
 	}
 	
-	public void preview(DefaultListModel<Action> doneList, JList<Action> listDoneDisplay){
-		Document tmp = parent;
+	public void previewDone(DefaultListModel<Action> doneList, int[] indices){
 		ActionStack tmpDone = done.copy();
 		ActionStack tmpUndone = undone.copy();
-		parent = new PreviewPanel(tmp, this, listDoneDisplay, doneList).getTextArea();
-		bulkUndo(doneList, listDoneDisplay);
+		String pastText = this.getParent().getText();		
+		bulkUndo(doneList, indices);
+		new PreviewPanel(this.getParent().getText(), this, indices, doneList, 0);
 		done = tmpDone;
 		undone = tmpUndone;
-		parent = tmp;
+		this.getParent().setText(pastText);
 		frame.getHistoryFrame().update();
 	}
 	
-	public void saveHistoryToFile(String pathName){
+	public void previewUndone(DefaultListModel<Action> doneList, int[] indices){
+		ActionStack tmpDone = done.copy();
+		ActionStack tmpUndone = undone.copy();
+		String pastText = this.getParent().getText();		
+		bulkRedo(doneList, indices);
+		new PreviewPanel(this.getParent().getText(), this, indices, doneList, 1);
+		done = tmpDone;
+		undone = tmpUndone;
+		this.getParent().setText(pastText);
+		frame.getHistoryFrame().update();
+	}
+	
+	public void saveHistoryToFile(File f){
 		try {
-			File f = new File(pathName + ".hist");
 			if(!f.exists())
 				f.createNewFile();
 			PrintWriter write = new PrintWriter(f);
-			
-			write.println("DONE");
+						
+			write.println(getParent().getText().length());
 			
 			for(int i = 0; i < done.size(); i++){
 				Action a = done.getActionAt(i);
-				write.println(a.getClass().getName() + ":" + a.getPos() + ":" + a.getValue());
+				write.println(a.getName() + "\n" + a.getPos() + "\n" + a.canChangeBelow() + "\n" + a.getValue().length() + "\n" + a.getValue());
 			}
 			
-			write.println("UNDONE");
+			write.println("-");
 			
 			for(int i = 0; i < undone.size(); i++){
 				Action a = undone.getActionAt(i);
-				write.println(a.getClass().getName() + ":" + a.getPos() + ":" + a.getValue());
+				write.println(a.getName() + "\n" + a.getPos() + "\n" + a.canChangeBelow() + "\n" + a.getValue().length() + "\n" + a.getValue());
 			}
 			
 			write.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadHistoryFile(File f){
+		try {
+			Scanner sc = new Scanner(f);
+			
+			int fLength = Integer.parseInt(sc.nextLine());
+			
+			if(fLength != getParent().getText().length()){
+				sc.close();
+				JOptionPane.showMessageDialog(getParent(), "Error: History file does not match the current document.");
+				return;
+			}
+			
+			String currentLine = "";
+			
+			boolean swap = true;
+			while(sc.hasNextLine()){
+				
+				currentLine = sc.nextLine();
+				
+				if(currentLine.equals("-")){
+					swap = false;
+					continue;
+				}
+				
+				String name = currentLine;
+				int pos = Integer.parseInt(sc.nextLine());
+				boolean change = sc.nextLine().equals("true");
+				int length = Integer.parseInt(sc.nextLine());
+				String value = "";
+				
+			    sc.useDelimiter("");
+				for(int i = 0; i < length; i++)
+					value += sc.next();
+							
+				if(sc.hasNext())
+					sc.next();
+				
+				sc.reset();
+				
+				if(name.equalsIgnoreCase("Insertion")){
+					ActionType type = new ActionType(pos, this);
+					type.setString(value);
+					type.setCanChange(change);
+					if(swap)
+						done.addAction(type);
+					else
+						undone.addAction(type);
+				}else if(name.equalsIgnoreCase("Deletion")){
+					ActionDelete delete = new ActionDelete(pos, this, value);
+					delete.setCanChange(change);
+					if(swap)
+						done.addAction(delete);
+					else
+						undone.addAction(delete);
+				}
+			}
+			frame.getHistoryFrame().update();
+			sc.close();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

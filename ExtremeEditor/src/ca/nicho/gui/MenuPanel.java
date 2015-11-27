@@ -17,14 +17,17 @@ public class MenuPanel extends JPanel{
 	private JMenuBar topBar;
 	private FileMenu fileMenu;
 	private EditMenu editMenu;
+	private FontPanel fontPanel;
 			
-	public MenuPanel(HandlerAction handler){
+	public MenuPanel(HandlerAction handler, FontPanel fontPanel){
+		
+		this.fontPanel = fontPanel;
 		
 		this.setLayout(new BorderLayout());
 		
 		this.topBar = new JMenuBar();
 		
-		this.fileMenu = new FileMenu();
+		this.fileMenu = new FileMenu(fontPanel);
 		this.editMenu = new EditMenu(handler);
 		
 		this.topBar.add(fileMenu);

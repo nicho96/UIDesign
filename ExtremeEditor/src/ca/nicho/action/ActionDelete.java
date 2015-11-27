@@ -12,10 +12,6 @@ public class ActionDelete extends Action{
 		this.length += text.length();
 	}
 	
-	public void setPos(int pos){
-		this.pos = pos;
-	}
-	
 	@Override
 	public int getLength(){
 		return -length;
@@ -23,7 +19,7 @@ public class ActionDelete extends Action{
 	
 	@Override
 	public void undoAction() {
-		handler.getParent().insertString(pos, value);
+		handler.getParent().insertString(pos + getLength() + 1, value);
 	}
 
 	@Override

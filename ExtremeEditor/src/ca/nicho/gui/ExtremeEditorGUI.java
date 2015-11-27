@@ -44,8 +44,8 @@ public class ExtremeEditorGUI extends JFrame{
 		
 		this.headerPanel = new JPanel();
 		this.headerPanel.setLayout(new BorderLayout());
-		this.menuPanel = new MenuPanel(handler);
 		this.fontPanel = new FontPanel(handler, historyDialog);
+		this.menuPanel = new MenuPanel(handler, fontPanel);
 
 		
 		this.headerPanel.add(menuPanel, BorderLayout.PAGE_START);

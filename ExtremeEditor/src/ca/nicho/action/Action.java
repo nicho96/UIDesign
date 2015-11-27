@@ -25,6 +25,10 @@ public abstract class Action {
 		this.pos = pos;
 	}
 	
+	public String getName(){
+		return name;
+	}
+	
 	public int getLength(){
 		return length;
 	}
