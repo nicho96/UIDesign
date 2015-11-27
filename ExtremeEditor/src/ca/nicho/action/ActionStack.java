@@ -1,9 +1,5 @@
 package ca.nicho.action;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -69,8 +65,15 @@ public class ActionStack {
 		
 		for(int i = 0; i < stack.size(); i++)
 			copy.addAction(stack.get(i).copy());
-		
 		return copy;
+		
+	}
+	
+	public void debug(){
+		for(int i = 0; i < stack.size(); i++){
+			System.out.print(stack.get(i).getPos() + " ");
+		}
+		System.out.println("\n");
 	}
 	
 }

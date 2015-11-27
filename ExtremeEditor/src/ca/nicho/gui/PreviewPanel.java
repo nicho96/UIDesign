@@ -17,6 +17,8 @@ import ca.nicho.action.HandlerAction;
 
 public class PreviewPanel extends JDialog implements ActionListener{
 
+	
+	private JPanel mainPanel;
 	private Document textArea;
 	private JPanel bottomPanel;
 	private JButton apply;
@@ -29,27 +31,33 @@ public class PreviewPanel extends JDialog implements ActionListener{
 	
 	public PreviewPanel(Document doc, HandlerAction handler, JList<Action> list, DefaultListModel<Action> model){
 		super(doc.getTopFrame(), "", ModalityType.APPLICATION_MODAL);
+		doc.setHandler(handler);
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
 		this.setTitle("PREVIEW");
+		
+		this.handler = handler;
+		this.list = list;
+		this.model = model;
+
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
 		
 		textArea = new Document(doc.getTopFrame());
 		textArea.setEditable(false);
 		textArea.setText(doc.getText());
-		this.add(new JScrollPane(textArea), BorderLayout.CENTER);
+		mainPanel.add(new JScrollPane(textArea), BorderLayout.CENTER);
 		
 		bottomPanel = new JPanel();
 		bottomPanel.add(apply = new JButton("Apply"));
 		bottomPanel.add(discard = new JButton("Discard"));
-		add(bottomPanel, BorderLayout.PAGE_END);
-		this.handler = handler;
+		mainPanel.add(bottomPanel, BorderLayout.PAGE_END);
+		
+		add(mainPanel);
 		
 		apply.addActionListener(this);
 		discard.addActionListener(this);
-		
-		this.list = list;
-		this.model = model;
+		this.setVisible(true);
 	}
 	
 	public Document getTextArea(){

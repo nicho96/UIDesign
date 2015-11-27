@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.JTextPane;
 
 import ca.nicho.gui.ActionHistoryFrame;
 import ca.nicho.gui.Document;
@@ -15,8 +14,8 @@ import ca.nicho.gui.PreviewPanel;
 
 public class HandlerAction {
 
-	private ActionStack done = new ActionStack();
-	private ActionStack undone = new ActionStack();
+	public ActionStack done = new ActionStack();
+	public ActionStack undone = new ActionStack();
 	
 	private ActionHistoryFrame frame;
 	private Document parent;

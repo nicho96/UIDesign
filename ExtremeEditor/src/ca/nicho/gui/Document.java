@@ -36,7 +36,7 @@ public class Document extends JTextPane implements KeyListener, MouseListener{
 		try {
 			this.getDocument().remove(pos, length);
 		} catch (BadLocationException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage() + ": " + pos + " " + length);
 		}
 	}
 	
@@ -48,8 +48,7 @@ public class Document extends JTextPane implements KeyListener, MouseListener{
 		try {
 			this.getDocument().insertString(pos, text, null);
 		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage() + ": " + pos + " " + text);
 		}
 	}
 	
