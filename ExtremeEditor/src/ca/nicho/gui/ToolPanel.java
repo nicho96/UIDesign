@@ -28,16 +28,16 @@ public class ToolPanel extends JPanel implements ActionListener{
 	
 	private JButton undo, redo, history;
 	
-	public Color idle = Color.RED;
+	public Color idle = Color.BLUE;
 	public Color pressed = Color.GREEN;
 	
 	public ToolPanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout(1,3));
 		this.handler = handler;
 		this.actions = actions;
-		ImageIcon undoIcon = new ImageIcon("res/undo2.png");
-		ImageIcon redoIcon = new ImageIcon("res/redo2.png");
-		ImageIcon historyIcon = new ImageIcon("res/history2.png");
+		ImageIcon undoIcon = new ImageIcon("icons/ic_replay_black_48dp.png");
+		ImageIcon redoIcon = new ImageIcon("icons/ic_redo_black_48dp.png");
+		ImageIcon historyIcon = new ImageIcon("icons/ic_history_black_48dp.png");
 
 		
 		Image img = undoIcon.getImage();
@@ -95,7 +95,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 
 		
 		Image histImg = historyIcon.getImage();
-		histImg = histImg.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
+		histImg = histImg.getScaledInstance(31, 31, java.awt.Image.SCALE_SMOOTH);
 		historyIcon.setImage(histImg);
 		history = new JButton(historyIcon);
 		history.setBorder(BorderFactory.createEtchedBorder());

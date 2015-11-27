@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -28,16 +27,16 @@ public class CPPanel extends JPanel implements ActionListener{
 	
 	private JButton copy, paste, cut;
 	
-	public Color idle = Color.RED;
+	public Color idle = Color.BLUE;
 	public Color pressed = Color.GREEN;
 	
 	public CPPanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout(1,3));
 		this.handler = handler;
 		this.actions = actions;
-		ImageIcon copyIcon = new ImageIcon("res/copy.png");
-		ImageIcon pasteIcon = new ImageIcon("res/paste.png");
-		ImageIcon cutIcon = new ImageIcon("res/scissors2.png");
+		ImageIcon copyIcon = new ImageIcon("icons/ic_content_copy_black_48dp.png");
+		ImageIcon pasteIcon = new ImageIcon("icons/ic_assignment_black_48dp.png");
+		ImageIcon cutIcon = new ImageIcon("icons/content-cut.png");
 		
 		Image img = copyIcon.getImage();
 		Image copyImg = img.getScaledInstance( 28, 28,  java.awt.Image.SCALE_SMOOTH );
@@ -48,12 +47,11 @@ public class CPPanel extends JPanel implements ActionListener{
 		copy.setToolTipText("copy (Ctrl + Z)");
 		copy.setBorder(BorderFactory.createEtchedBorder());
 		copy.setContentAreaFilled(false);
-		
 		copy.addMouseListener(new java.awt.event.MouseAdapter() {
+			
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
 		        copy.setBackground(idle);
 		    }
-
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
 		    	copy.setBackground(pressed);
 		    }
@@ -92,7 +90,7 @@ public class CPPanel extends JPanel implements ActionListener{
 		
 
 		Image cutImg = cutIcon.getImage();
-		cutImg = cutImg.getScaledInstance(46, 46, java.awt.Image.SCALE_SMOOTH);
+		cutImg = cutImg.getScaledInstance(28, 28, java.awt.Image.SCALE_SMOOTH);
 		cutIcon.setImage(cutImg);
 		cut = new JButton(cutIcon);
 		cut.setBorder(BorderFactory.createEtchedBorder());

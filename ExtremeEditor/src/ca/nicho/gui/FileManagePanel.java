@@ -29,16 +29,16 @@ public class FileManagePanel extends JPanel implements ActionListener{
 	
 	private JButton open, save, delete;
 	
-	public Color idle = Color.RED;
+	public Color idle = Color.BLUE;
 	public Color pressed = Color.GREEN;
 	
 	public FileManagePanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout());
 		this.handler = handler;
 		this.actions = actions;
-		ImageIcon openIcon = new ImageIcon("res/open.png");
-		ImageIcon saveIcon = new ImageIcon("res/save.png");
-		ImageIcon deleteIcon = new ImageIcon("res/delete.png");
+		ImageIcon openIcon = new ImageIcon("icons/ic_folder_open_black_48dp.png");
+		ImageIcon saveIcon = new ImageIcon("icons/ic_save_48px-128.png");
+		ImageIcon deleteIcon = new ImageIcon("icons/ic_delete_black_48dp.png");
 		
 		Image img = openIcon.getImage();
 		Image openImg = img.getScaledInstance( 28, 28,  java.awt.Image.SCALE_SMOOTH );
