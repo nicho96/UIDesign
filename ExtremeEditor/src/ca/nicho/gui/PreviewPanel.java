@@ -74,6 +74,12 @@ public class PreviewPanel extends JDialog implements ActionListener{
 			this.dispose();
 		}else{
 			this.dispose();
+			if(type == 0){
+				handler.getFrame().getHistoryFrame().setDoneSelect(list);
+			}else{
+				handler.getFrame().getHistoryFrame().setUndoneSelect(list);
+
+			}
 		}
 	}
 	

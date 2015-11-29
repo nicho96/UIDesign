@@ -135,7 +135,7 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		
 	}
 	
-	public void save(){
+	public String save(){
 		try {
 			JFileChooser chooser = new JFileChooser();
 			chooser.showSaveDialog(this);
@@ -150,12 +150,13 @@ public class FileManagePanel extends JPanel implements ActionListener{
 					handler.saveHistoryToFile(new File(f.getAbsolutePath() + ".hist"));
 				}
 				writer.close();
+				return f.getAbsolutePath();
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 	
 	public void load(){

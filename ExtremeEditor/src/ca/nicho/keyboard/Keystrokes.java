@@ -62,7 +62,7 @@ public class Keystrokes implements KeyListener{
 				if(doc.getSelectedText() != null){
 					text = doc.getSelectedText();
 					doc.getDocument().remove(Math.min(doc.getSelectionStart(), doc.getSelectionEnd()), text.length());
-					Action a = new ActionDelete(pos, handler, text);
+					Action a = new ActionDelete(pos + text.length() - 1, handler, text);
 					handler.addDoneAction(a);
 			
 				}else{

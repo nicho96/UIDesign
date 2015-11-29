@@ -186,7 +186,7 @@ public class HandlerAction {
 		done = tmpDone;
 		undone = tmpUndone;
 		this.getParent().setText(pastText);
-		frame.getHistoryFrame().update();
+		frame.getHistoryFrame().update();	
 	}
 	
 	public void previewUndone(DefaultListModel<Action> doneList, int[] indices){
@@ -233,6 +233,10 @@ public class HandlerAction {
 	
 	public void loadHistoryFile(File f){
 		try {
+			
+			if(!f.exists())
+				return;
+			
 			Scanner sc = new Scanner(f);
 			
 			int fLength = Integer.parseInt(sc.nextLine());

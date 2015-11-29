@@ -13,16 +13,19 @@ public class FontPanel extends JPanel{
 	
 	private ToolPanel toolPanel;
 	private CPPanel copyPastePanel;
-	private FileManagePanel fileManagePanel;	
+	private FileManagePanel fileManagePanel;
+	private CompilePanel compilePanel;
 	
 	public FontPanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 		fileManagePanel = new FileManagePanel(handler, actions);
 		toolPanel = new ToolPanel(handler, actions);
 		copyPastePanel = new CPPanel(handler,actions);
+		compilePanel = new CompilePanel(handler, fileManagePanel);
 		this.add(fileManagePanel);
 		this.add(toolPanel);
 		this.add(copyPastePanel);
+		this.add(compilePanel);
 		this.setBorder(BorderFactory.createLoweredSoftBevelBorder());
 		this.setBackground(new Color(166,177,178));
 		this.setPreferredSize(new Dimension(40,50));
