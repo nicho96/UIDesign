@@ -46,7 +46,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 		undo = new JButton(undoIcon);
 		undo.setIcon(undoIcon);
 		undo.addActionListener(this);
-		undo.setToolTipText("Undo (Ctrl + Z)");
+		undo.setToolTipText("Undo Ctrl-Z");
 		undo.setBorder(BorderFactory.createEtchedBorder());
 		undo.setContentAreaFilled(false);
 
@@ -75,7 +75,7 @@ public class ToolPanel extends JPanel implements ActionListener{
 		redo.setContentAreaFilled(false);
 		redo.addActionListener(this);
 		redo.setBorder(BorderFactory.createEtchedBorder());
-		redo.setToolTipText("Redo (HotKey tbd)");
+		redo.setToolTipText("Redo Ctrl-Y");
 		
 		redo.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {

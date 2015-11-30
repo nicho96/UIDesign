@@ -40,9 +40,14 @@ public class EditMenu extends JMenu implements ActionListener{
 		this.undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
 		this.undo.addActionListener(this);
 		
+		this.redo = new JMenuItem("Redo");
+		this.redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
+		this.redo.addActionListener(this);
+		
 		this.add(copy);
 		this.add(paste);
 		this.add(undo);
+		this.add(redo);
 	}
 
 	@Override
@@ -70,6 +75,8 @@ public class EditMenu extends JMenu implements ActionListener{
 				}
 		}else if(src.equals(undo)){
 			handler.undo();
+		}else if(src.equals(redo)){
+			handler.redo();
 		}
 	}
 
