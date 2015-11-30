@@ -22,8 +22,8 @@ public class CompilePanel extends JPanel implements ActionListener{
 	private HandlerAction handler;
 	private FileManagePanel fmp;
 	
-	public Color idle = Color.RED;
-	public Color pressed = Color.GREEN;
+	public Color idle = Color.BLACK;
+	public Color pressed = Color.GRAY;
 	
 	public CompilePanel(HandlerAction handler, FileManagePanel fmp){
 		this.handler = handler;
@@ -48,9 +48,11 @@ public class CompilePanel extends JPanel implements ActionListener{
 		        compile.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	compile.setContentAreaFilled(true);
 		    	compile.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	compile.setContentAreaFilled(false);
 		    	compile.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {

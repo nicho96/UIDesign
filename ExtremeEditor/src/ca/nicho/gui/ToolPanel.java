@@ -28,8 +28,8 @@ public class ToolPanel extends JPanel implements ActionListener{
 	
 	private JButton undo, redo, history;
 	
-	public Color idle = Color.BLUE;
-	public Color pressed = Color.GREEN;
+	public Color idle = Color.BLACK;
+	public Color pressed = Color.GRAY;
 	
 	public ToolPanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout(1,3));
@@ -55,9 +55,11 @@ public class ToolPanel extends JPanel implements ActionListener{
 		        undo.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	undo.setContentAreaFilled(true);
 		    	undo.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	undo.setContentAreaFilled(false);
 		    	undo.setBackground(idle);
 		    }
 		    
@@ -82,9 +84,11 @@ public class ToolPanel extends JPanel implements ActionListener{
 		        redo.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	redo.setContentAreaFilled(true);
 		    	redo.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	redo.setContentAreaFilled(false);
 		    	redo.setBackground(idle);
 		    }
 
@@ -109,9 +113,11 @@ public class ToolPanel extends JPanel implements ActionListener{
 		    }
 		    
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	history.setContentAreaFilled(true);
 		    	history.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	history.setContentAreaFilled(false);
 		    	history.setBackground(idle);
 		    }
 		    	

@@ -29,8 +29,8 @@ public class FileManagePanel extends JPanel implements ActionListener{
 	
 	private JButton open, save, delete;
 	
-	public Color idle = Color.BLUE;
-	public Color pressed = Color.GREEN;
+	public Color idle = Color.BLACK;
+	public Color pressed = Color.GRAY;
 	
 	public FileManagePanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout());
@@ -55,9 +55,11 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		        open.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	open.setContentAreaFilled(true);
 		    	open.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	open.setContentAreaFilled(false);
 		    	open.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -80,9 +82,11 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		        save.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	save.setContentAreaFilled(true);
 		    	save.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	save.setContentAreaFilled(false);
 		    	save.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -104,9 +108,11 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		        delete.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	delete.setContentAreaFilled(true);
 		    	delete.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	delete.setContentAreaFilled(false);
 		    	delete.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {

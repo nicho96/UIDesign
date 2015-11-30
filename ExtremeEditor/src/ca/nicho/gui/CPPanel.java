@@ -27,8 +27,8 @@ public class CPPanel extends JPanel implements ActionListener{
 	
 	private JButton copy, paste, cut;
 	
-	public Color idle = Color.BLUE;
-	public Color pressed = Color.GREEN;
+	public Color idle = Color.BLACK;
+	public Color pressed = Color.GRAY;
 	
 	public CPPanel(HandlerAction handler, ActionHistoryFrame actions){
 		this.setLayout(new GridLayout(1,3));
@@ -53,9 +53,11 @@ public class CPPanel extends JPanel implements ActionListener{
 		        copy.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	copy.setContentAreaFilled(true);
 		    	copy.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	copy.setContentAreaFilled(false);
 		    	copy.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -77,9 +79,11 @@ public class CPPanel extends JPanel implements ActionListener{
 		        paste.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	paste.setContentAreaFilled(true);
 		    	paste.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	paste.setContentAreaFilled(false);
 		    	paste.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -103,9 +107,11 @@ public class CPPanel extends JPanel implements ActionListener{
 		        cut.setBackground(idle);
 		    }
 		    public void mousePressed(java.awt.event.MouseEvent evt) {
+		    	cut.setContentAreaFilled(true);
 		    	cut.setBackground(pressed);
 		    }
 		    public void mouseReleased(java.awt.event.MouseEvent evt) {
+		    	cut.setContentAreaFilled(false);
 		    	cut.setBackground(idle);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
