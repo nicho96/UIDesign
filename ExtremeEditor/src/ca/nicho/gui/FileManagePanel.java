@@ -46,7 +46,7 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		open = new JButton(openIcon);
 		open.setIcon(openIcon);
 		open.addActionListener(this);
-		open.setToolTipText("open");
+		open.setToolTipText("Open Ctrl-O");
 		open.setBorder(BorderFactory.createEtchedBorder());
 		open.setContentAreaFilled(false);
 		
@@ -73,7 +73,7 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		save.setContentAreaFilled(false);
 		save.addActionListener(this);
 		save.setBorder(BorderFactory.createEtchedBorder());
-		save.setToolTipText("save") ;
+		save.setToolTipText("Save Ctrl-S") ;
 		
 		save.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -96,7 +96,7 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		delete = new JButton(deleteIcon);
 		delete.setBorder(BorderFactory.createEtchedBorder());
 		delete.setContentAreaFilled(false);
-		delete.setToolTipText("delete");
+		delete.setToolTipText("Delete");
 		delete.addActionListener(this);
 		
 		delete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,7 +135,7 @@ public class FileManagePanel extends JPanel implements ActionListener{
 		
 	}
 	
-	public void save(){
+	public String save(){
 		try {
 			JFileChooser chooser = new JFileChooser();
 			chooser.showSaveDialog(this);
@@ -150,12 +150,13 @@ public class FileManagePanel extends JPanel implements ActionListener{
 					handler.saveHistoryToFile(new File(f.getAbsolutePath() + ".hist"));
 				}
 				writer.close();
+				return f.getAbsolutePath();
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 	
 	public void load(){

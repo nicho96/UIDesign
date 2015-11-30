@@ -44,7 +44,7 @@ public class CPPanel extends JPanel implements ActionListener{
 		copy = new JButton(copyIcon);
 		copy.setIcon(copyIcon);
 		copy.addActionListener(this);
-		copy.setToolTipText("copy (Ctrl + Z)");
+		copy.setToolTipText("Copy Ctrl-Z");
 		copy.setBorder(BorderFactory.createEtchedBorder());
 		copy.setContentAreaFilled(false);
 		copy.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -70,7 +70,7 @@ public class CPPanel extends JPanel implements ActionListener{
 		paste.setContentAreaFilled(false);
 		paste.addActionListener(this);
 		paste.setBorder(BorderFactory.createEtchedBorder());
-		paste.setToolTipText("paste (HotKey tbd)");
+		paste.setToolTipText("Paste Ctrl-V");
 		
 		paste.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -95,7 +95,7 @@ public class CPPanel extends JPanel implements ActionListener{
 		cut = new JButton(cutIcon);
 		cut.setBorder(BorderFactory.createEtchedBorder());
 		cut.setContentAreaFilled(false);
-		cut.setToolTipText("cut");
+		cut.setToolTipText("Cut");
 		cut.addActionListener(this);
 		
 		cut.addMouseListener(new java.awt.event.MouseAdapter() {

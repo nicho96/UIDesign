@@ -176,7 +176,14 @@ public class HistoryPanel extends JPanel implements MouseListener, ActionListene
 		update();
 	}
 	
-
+	public void setDoneSelect(int[] indices){
+		listDoneDisplay.setSelectedIndices(indices);
+	}
+	
+	public void setUndoneSelect(int[] indices){
+		listUndoneDisplay.setSelectedIndices(indices);
+	}
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub

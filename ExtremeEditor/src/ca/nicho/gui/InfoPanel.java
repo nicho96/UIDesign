@@ -10,18 +10,14 @@ import javax.swing.JPanel;
 
 public class InfoPanel extends JPanel{
 
-	private JLabel countLabel;
 	private JLabel messageLabel;
 	
 	public InfoPanel(){
 		
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
-		countLabel = new JLabel("10");
-		messageLabel = new JLabel("Welcome!");
+		messageLabel = new JLabel("(C) 2015 Apache License 2.0 - Nicholas Mercier, Paul Tonon, Alex McGraw and Diego M. Carbajal ");
 		this.add(messageLabel);
-		this.add(countLabel);
-		this.setBackground(new Color(166,177,178));
 		this.setBorder(BorderFactory.createEtchedBorder());
 		
 	}
